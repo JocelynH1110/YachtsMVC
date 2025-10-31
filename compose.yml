@@ -1,0 +1,26 @@
+﻿services:
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: mssql
+    hostname: mssql
+    ports:
+      - "1500:1433"
+    environment:
+      - ACCEPT_EULA=1
+      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Developer
+    volumes:
+      - yachts_mssql_data:/var/opt/mssql
+    restart: unless-stopped
+    networks:
+      - azure-sql-network
+    cap_add:
+      - SYS_PTRACE
+
+volumes:
+  yachts_mssql_data:
+    driver: local
+
+networks:
+  azure-sql-network:
+    driver: bridge
