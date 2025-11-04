@@ -4,7 +4,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <title>Yachts 後台管理</title>
-    
+
     <link rel="icon" type="image/x-icon" href="~/Images/pit008.jpg">
 
     <!-- Google fonts -->
@@ -42,8 +42,8 @@
                 <!-- Brand demo (see assets/css/demo/demo.css) -->
                 <div class="app-brand demo">
                     @*<span class="app-brand-logo demo">
-                        logo連結
-                    </span>*@
+                            logo連結
+                        </span>*@
                     <a href="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Yachts</a>
                     <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                         <i class="ion ion-md-menu align-middle"></i>
@@ -56,18 +56,18 @@
 
                     <!-- Dashboards -->
                     <li class="sidenav-item active">
-                        <a href="../Default.aspx" class="sidenav-link">
+                        <a href="/" class="sidenav-link">
                             <i class="sidenav-icon feather icon-home"></i>
-                            <div>首頁</div>
-                            <div class="pl-1 ml-auto">
-                                <div class="badge badge-danger">Hot</div>
-                            </div>
+                            <div>前台首頁</div>
+                            @*<div class="pl-1 ml-auto">
+                                    <div class="badge badge-danger">Hot</div>
+                                </div>*@
                         </a>
                     </li>
 
                     <!-- Layouts -->
                     <li class="sidenav-divider mb-1"></li>
-                    <li class="sidenav-header small font-weight-semibold">網頁導覽</li>
+                    <li class="sidenav-header small font-weight-semibold">總覽</li>
                     <li class="sidenav-item">
                         <a href="AlbumList.aspx" class="sidenav-link">
                             <i class="sidenav-icon feather icon-image"></i>
@@ -77,7 +77,7 @@
 
                     <!-- UI elements -->
                     <li class="sidenav-item">
-                        <a href="VideoList.aspx" class="sidenav-link sidenav-toggle">
+                        <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon feather icon-video"></i>
                             <div>新聞列表</div>
                         </a>
@@ -125,7 +125,7 @@
                     <li class="sidenav-divider mb-1"></li>
                     <li class="sidenav-header small font-weight-semibold">友站連結</li>
                     <li class="sidenav-item">
-                        <a href="/Admin/LinkList.aspx" class="sidenav-link sidenav-toggle">
+                        <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon feather icon-link"></i>
                             <div>經銷商列表</div>
                         </a>
@@ -202,11 +202,11 @@
                         <div class="navbar-nav align-items-lg-center ml-auto">
                             <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
                                 @*<a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
-                                    <i class="feather icon-bell navbar-icon align-middle"></i>
-                                    <span class="badge badge-danger badge-dot indicator"></span>
-                                    <span class="d-lg-none align-middle">&nbsp; Notifications</span>
-                                </a>*@
-                                
+                                        <i class="feather icon-bell navbar-icon align-middle"></i>
+                                        <span class="badge badge-danger badge-dot indicator"></span>
+                                        <span class="d-lg-none align-middle">&nbsp; Notifications</span>
+                                    </a>*@
+
                                 @*信件通知*@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="bg-primary text-center text-white font-weight-bold p-3">
@@ -351,13 +351,29 @@
                 <!-- [ Layout navbar ( Header ) ] End -->
                 <!-- [ Layout content ] Start -->
                 <div class="layout-content">
-                    <form id="form1" runat="server">
+                    <!-- [ content ] Start -->
+                    <div class="container-fluid flex-grow-1 container-p-y">
                         <div>
                             @RenderBody()
                         </div>
-                    </form>
+                    </div>
+                    <!-- [ content ] End -->
+                    <!-- [ Layout footer ] Start -->
+                    <nav class="layout-footer footer bg-white">
+                        <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+                            <div class="pt-3">
+                                <span class="footer-text font-weight-semibold">&copy; <a href="https://srthemesvilla.com" class="footer-link" target="_blank">Tayana</a></span>
+                            </div>
+                            <div>
+                                <a href="javascript:" class="footer-link pt-3">About Us</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- [ Layout footer ] End -->
                 </div>
-                <!-- [ Layout content ] Start -->
+                <!-- [ Layout content ] End -->
             </div>
             <!-- [ Layout container ] End -->
         </div>
@@ -365,6 +381,7 @@
         <div class="layout-overlay layout-sidenav-toggle"></div>
     </div>
     <!-- [ Layout wrapper] End -->
+
     <!-- Core scripts -->
     <script src="~/assets/js/pace.js"></script>
     <script src="~/assets/js/jquery-3.3.1.min.js"></script>
@@ -387,22 +404,6 @@
     @*<script src="~/assets/js/demo.js"></script>*@
     <script src="~/assets/js/analytics.js"></script>
     <script src="~/assets/js/pages/dashboards_index.js"></script>
-
-
-    <!-- [ Layout footer ] Start -->
-    <nav class="layout-footer footer bg-white">
-        <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
-            <div class="pt-3">
-                <span class="footer-text font-weight-semibold">&copy; <a href="https://srthemesvilla.com" class="footer-link" target="_blank">Tayana</a></span>
-            </div>
-            <div>
-                <a href="javascript:" class="footer-link pt-3">About Us</a>
-                <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
-                <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
-            </div>
-        </div>
-    </nav>
-    <!-- [ Layout footer ] End -->
 </body>
 </html>
 
