@@ -17,7 +17,7 @@ namespace Yachts
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "Yachts.Controllers" }
+                namespaces: new[] { "Yachts.Controllers" }  // 這行為了讓前後台 controller 撞名時可以分辨吃的 controller 不同
             );
         }
     }
