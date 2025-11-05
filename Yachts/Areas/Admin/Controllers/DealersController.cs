@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
+using ISO3166;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -38,6 +39,7 @@ namespace Yachts.Areas.Admin.Controllers
         // GET: Admin/Dealers/Create
         public ActionResult Create()
         {
+            ViewBag.CountryCode = GetCountryList();
             return View();
         }
 
@@ -50,6 +52,8 @@ namespace Yachts.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                dealer.CreatedAt = DateTime.Now;
+                dealer.UpdatedAt = null;
                 db.Dealers.Add(dealer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +86,7 @@ namespace Yachts.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                dealer.UpdatedAt = DateTime.Now;
                 db.Entry(dealer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,5 +128,21 @@ namespace Yachts.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        private SelectList GetCountryList()
+        {
+            var countries = Country.List
+                .OrderBy(c => c.Name)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.TwoLetterCode,  // 兩字母代碼: TW
+                    Text = c.Name          // 國家名稱: Taiwan
+                })
+                .ToList();
+
+            countries.Insert(0, new SelectListItem { Value = "", Text = "請選擇國家" });
+
+            return new SelectList(countries, "Value", "Text");
+        }
+
     }
 }
