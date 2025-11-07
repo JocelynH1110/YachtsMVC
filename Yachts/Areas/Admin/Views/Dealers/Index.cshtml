@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Yachts.Models.Dealer>
-
+﻿@*@model IEnumerable<Yachts.Models.Dealer>*@
+@model MvcPaging.IPagedList<Yachts.Models.Dealer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -7,22 +7,28 @@
 
 <h2>經銷商列表</h2>
 
+    @using (Html.BeginForm("Index", "Dealers", FormMethod.Get))
+    {
+        <laber>顯示幾筆資料:</laber>
+        <input name="pageSize" value="@ViewBag.pageSize" />
+    }
+
 <p>
     @Html.ActionLink("新增", "Create")
 </p>
 <table class="table border-1">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PhotoPath)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PhotoPath)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CountryCode)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CountryCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Contact)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Contact)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Address)
@@ -34,13 +40,13 @@
             @Html.DisplayNameFor(model => model.Fax)
         </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Website)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Website)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedAt)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.UpdatedAt)
@@ -101,3 +107,7 @@
     }
 
 </table>
+
+<div class="pager">
+    @Html.Pager(Model.PageSize, Model.PageNumber,Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.PageSize))
+</div>

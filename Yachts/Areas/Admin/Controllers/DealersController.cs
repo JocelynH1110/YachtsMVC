@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
 using ISO3166;
+using MvcPaging;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -16,9 +17,25 @@ namespace Yachts.Areas.Admin.Controllers
         private DBModelContext db = new DBModelContext();
 
         // GET: Admin/Dealers
-        public ActionResult Index()
+        public ActionResult Index(int? page,int? pageSize)
         {
-            return View(db.Dealers.ToList());
+            // 一筆幾頁
+            if (!pageSize.HasValue)
+            {
+                pageSize = 5;
+            }
+            ViewBag.PageSize=pageSize;
+
+            // 目前頁數
+            if (!page.HasValue) 
+            { 
+                page = 1;
+            }
+
+            var dealers = db.Dealers.AsQueryable();
+            var result=dealers.OrderBy(d=>d.DealerId).ToPagedList(page.Value-1,pageSize.Value);
+
+            return View(result);
         }
 
         // GET: Admin/Dealers/Details/5
