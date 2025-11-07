@@ -22,7 +22,7 @@ namespace Yachts.Areas.Admin.Controllers
             // 一筆幾頁
             if (!pageSize.HasValue)
             {
-                pageSize = 5;
+                pageSize = 20;
             }
             ViewBag.PageSize=pageSize;
 
@@ -33,7 +33,7 @@ namespace Yachts.Areas.Admin.Controllers
             }
 
             var dealers = db.Dealers.AsQueryable();
-            var result=dealers.OrderBy(d=>d.DealerId).ToPagedList(page.Value-1,pageSize.Value);
+            var result=dealers.OrderByDescending(d=>d.CreatedAt).ToPagedList(page.Value-1,pageSize.Value);
 
             return View(result);
         }

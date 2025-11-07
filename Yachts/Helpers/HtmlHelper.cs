@@ -9,6 +9,7 @@ namespace Yachts.Helpers
 {
     public static class HtmlHelpers
     {
+        // 必填欄位後面加*
         public static MvcHtmlString LabelForRequired<TModel, TValue>(
             this HtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
@@ -38,6 +39,12 @@ namespace Yachts.Helpers
             }
 
             return MvcHtmlString.Create(label.ToString());
+        }
+
+        // 資料空的話顯示 尚未輸入資料
+        public static MvcHtmlString DisplayOrDefault(this HtmlHelper html, string value, string defaultText = "尚未輸入資料")
+        {
+            return new MvcHtmlString(!string.IsNullOrEmpty(value) ? value : defaultText);
         }
     }
 }
