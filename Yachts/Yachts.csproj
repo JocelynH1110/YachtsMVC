@@ -59,6 +59,9 @@
       <HintPath>..\packages\ISO3166.1.0.4\lib\net20\ISO3166.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -152,6 +155,10 @@
     <Compile Include="Migrations\202510240906564_CreateDealers.Designer.cs">
       <DependentUpon>202510240906564_CreateDealers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202511050821377_AddPhotoPathToDealer.cs" />
+    <Compile Include="Migrations\202511050821377_AddPhotoPathToDealer.Designer.cs">
+      <DependentUpon>202511050821377_AddPhotoPathToDealer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DBModelContext.cs" />
     <Compile Include="Models\Dealer.cs" />
@@ -224,6 +231,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Uploads\Dealers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -255,6 +263,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202510240906564_CreateDealers.resx">
       <DependentUpon>202510240906564_CreateDealers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202511050821377_AddPhotoPathToDealer.resx">
+      <DependentUpon>202511050821377_AddPhotoPathToDealer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

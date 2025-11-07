@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,38 +9,41 @@ namespace Yachts.Models
 {
     public class Dealer
     {
+        [Key]
         public int DealerId { get; set; }
 
+        [Display(Name = "公司名稱")]
         [Required(ErrorMessage = "請輸入公司名稱")]
         [StringLength(200,ErrorMessage = "名稱不可超過200個字")]
-        [Display(Name = "公司名稱")]
         public string CompanyName { get; set; }
 
-        [Required(ErrorMessage = "請輸入聯絡人姓名")]
-        [StringLength(100)]
         [Display(Name = "聯絡人")]
+        [Required(ErrorMessage = "請輸入聯絡人姓名")]
+        [StringLength(100)]  
         public string Contact { get; set; }
+
         [Display(Name = "公司地址")]
         public string Address { get; set; }
 
+        [Display(Name = "電話")]
         [Required(ErrorMessage = "請輸入電話號碼")]
         [StringLength(30)]
-        [Display(Name = "電話")]
         public string Tel { get; set; }
 
-        [StringLength(30)]
         [Display(Name = "傳真")]
+        [StringLength(30)]
         public string Fax { get; set; }
 
+        [Display(Name = "電子郵件")]
         [StringLength(200)]
         [EmailAddress]
-        [Display(Name = "電子郵件")]
         public string Email { get; set; }
 
+        [Display(Name = "公司網站")]
         [StringLength(200)]
         [Url]
-        [Display(Name = "公司網站")]
         public string Website { get; set; }
+
         [Display(Name = "建立時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -47,12 +51,21 @@ namespace Yachts.Models
         [Display(Name = "更新時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
         public DateTime? UpdatedAt { get; set; } = DateTime.Now;
+
         [Display(Name = "排列順序")]
         public int SortOrder { get; set; } = 0;
 
         [Required]
-        [StringLength(2, ErrorMessage = "國家代碼必須是2個字母")]
         [Display(Name = "國家代碼")]
         public string CountryCode { get; set; }
+
+        // 儲存在資料庫的圖片檔路徑
+        [Display(Name = "照片")]
+        [StringLength(255)]
+        public string PhotoPath { get; set; }
+
+        // 不存進資料庫，用來接收使用者上傳檔案
+        [NotMapped]
+        public HttpPostedFileBase PhotoFile { get; set; }
     }
 }

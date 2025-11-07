@@ -48,17 +48,36 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DealerId,CompanyName,Contact,Address,Tel,Fax,Email,Website,CreatedAt,UpdatedAt,SortOrder,CountryCode")] Dealer dealer)
+        public ActionResult Create([Bind(Include = "CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile")] Dealer dealer)
         {
             if (ModelState.IsValid)
             {
                 dealer.CreatedAt = DateTime.Now;
                 dealer.UpdatedAt = null;
+
+                // 如果有上傳檔案
+                if (dealer.PhotoFile != null && dealer.PhotoFile.ContentLength > 0)
+                {
+                    // 取得檔名（避免重名）
+                    string fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(dealer.PhotoFile.FileName);
+                    string uploadDir = Server.MapPath("~/Uploads/Dealers");
+
+                    // 如果資料夾不存在就建立
+                    if (!System.IO.Directory.Exists(uploadDir))
+                        System.IO.Directory.CreateDirectory(uploadDir);
+
+                    string filePath = System.IO.Path.Combine(uploadDir, fileName);
+                    dealer.PhotoFile.SaveAs(filePath);
+
+                    // 存相對路徑到 DB
+                    dealer.PhotoPath = "/Uploads/Dealers/" + fileName;
+                }
+
                 db.Dealers.Add(dealer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.CountryCode = GetCountryList();
             return View(dealer);
         }
 
@@ -74,6 +93,7 @@ namespace Yachts.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CountryCode = GetCountryList();
             return View(dealer);
         }
 
@@ -82,15 +102,52 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DealerId,CompanyName,Contact,Address,Tel,Fax,Email,Website,CreatedAt,UpdatedAt,SortOrder,CountryCode")] Dealer dealer)
+        public ActionResult Edit([Bind(Include = "DealerId,CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile")] Dealer dealer)
         {
             if (ModelState.IsValid)
             {
-                dealer.UpdatedAt = DateTime.Now;
-                db.Entry(dealer).State = EntityState.Modified;
+                // dealer.UpdatedAt = DateTime.Now;
+                // db.Entry(dealer).State = EntityState.Modified;
+                var dbDealer = db.Dealers.Find(dealer.DealerId);
+                if (dbDealer == null)
+                    return HttpNotFound();
+
+                dbDealer.CompanyName = dealer.CompanyName;
+                dbDealer.Contact = dealer.Contact;
+                dbDealer.Address = dealer.Address;
+                dbDealer.Tel = dealer.Tel;
+                dbDealer.Email = dealer.Email;
+                dbDealer.Website = dealer.Website;
+                dbDealer.Fax = dealer.Fax;
+                dbDealer.UpdatedAt = DateTime.Now;
+                dbDealer.SortOrder = dealer.SortOrder;
+                dbDealer.CountryCode = dealer.CountryCode;
+
+                // 如果有重新上傳新照片
+                if (dealer.PhotoFile != null && dealer.PhotoFile.ContentLength > 0)
+                {
+                    try { 
+                    string fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(dealer.PhotoFile.FileName);
+                    string uploadDir = Server.MapPath("~/Uploads/Dealers");
+
+                    if (!System.IO.Directory.Exists(uploadDir))
+                        System.IO.Directory.CreateDirectory(uploadDir);
+
+                    string filePath = System.IO.Path.Combine(uploadDir, fileName);
+                    dealer.PhotoFile.SaveAs(filePath);
+
+                    dbDealer.PhotoPath = "/Uploads/Dealers/" + fileName;
+                    }
+                    catch(Exception ex) 
+                    {
+
+                        ModelState.AddModelError("", "圖片上傳失敗：" + ex.Message);
+                    }
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CountryCode = GetCountryList();
             return View(dealer);
         }
 
