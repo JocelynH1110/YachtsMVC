@@ -17,7 +17,7 @@ namespace Yachts.Areas.Admin.Controllers
         private DBModelContext db = new DBModelContext();
 
         // GET: Admin/Dealers
-        public ActionResult Index(int? page,int? pageSize)
+        public ActionResult Index(int? page,int? pageSize,string searchByCompany)
         {
             // 一筆幾頁
             if (!pageSize.HasValue)
@@ -33,7 +33,13 @@ namespace Yachts.Areas.Admin.Controllers
             }
 
             var dealers = db.Dealers.AsQueryable();
-            var result=dealers.OrderByDescending(d=>d.CreatedAt).ToPagedList(page.Value-1,pageSize.Value);
+          
+            if (!string.IsNullOrEmpty(searchByCompany))
+            {
+                dealers=dealers.Where(d=>d.CompanyName.Contains(searchByCompany));
+                ViewBag.SearchByCompany=searchByCompany;
+            }
+            var result = dealers.OrderByDescending(d => d.CreatedAt).ToPagedList(page.Value - 1, pageSize.Value);
 
             return View(result);
         }

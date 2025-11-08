@@ -6,12 +6,19 @@
 }
 
 <h2>經銷商列表</h2>
-
 @using (Html.BeginForm("Index", "Dealers", FormMethod.Get))
 {
-    <laber>顯示幾筆資料:</laber>
+    <span>快速搜尋:</span>
+    <label>公司名稱</label>
+    <input type="search" name="searchByCompany" value="@ViewBag.SearchByCompany" />
+    <input type="submit" value="搜尋" />
+}
+@using (Html.BeginForm("Index", "Dealers", FormMethod.Get))
+{
+    <laber>目前顯示幾筆資料:</laber>
     <input name="pageSize" value="@ViewBag.pageSize" />
 }
+
 
 <p>
     @Html.ActionLink("新增", "Create")

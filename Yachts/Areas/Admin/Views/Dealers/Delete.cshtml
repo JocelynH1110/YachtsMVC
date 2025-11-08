@@ -5,13 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>刪除經銷商資料</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Dealer</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
             @Html.DisplayNameFor(model => model.CompanyName)
         </dt>
@@ -33,7 +32,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayOrDefault(Model.Address)
         </dd>
 
         <dt>
@@ -49,7 +48,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fax)
+            @Html.DisplayOrDefault(Model.Fax)
         </dd>
 
         <dt>
@@ -57,7 +56,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayOrDefault(Model.Email)
         </dd>
 
         <dt>
@@ -65,7 +64,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Website)
+            @Html.DisplayOrDefault(Model.Website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryCode)
         </dd>
 
         <dt>
@@ -84,21 +91,15 @@
             @Html.DisplayFor(model => model.UpdatedAt)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.SortOrder)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SortOrder)
-        </dd>
+        </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CountryCode)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CountryCode)
-        </dd>
 
     </dl>
 

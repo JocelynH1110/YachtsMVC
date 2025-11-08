@@ -8,8 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Delete.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Yachts/Helpers/HtmlHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Helpers/HtmlHelper.cs" afterDir="false" />
     </list>
@@ -104,7 +104,7 @@
       <workItem from="1760682703057" duration="438000" />
       <workItem from="1760792083826" duration="360000" />
       <workItem from="1761187949304" duration="1300000" />
-      <workItem from="1762394914151" duration="5771000" />
+      <workItem from="1762394914151" duration="7094000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Web;
 
 namespace Yachts.Helpers
 {
@@ -41,10 +42,11 @@ namespace Yachts.Helpers
             return MvcHtmlString.Create(label.ToString());
         }
 
-        // 資料空的話顯示 尚未輸入資料
-        public static MvcHtmlString DisplayOrDefault(this HtmlHelper html, string value, string defaultText = "尚未輸入資料")
+        // 資料空的話顯示 尚未輸入資料,輸入框要編碼不然會被xss
+        public static IHtmlString DisplayOrDefault(this HtmlHelper html, string value, string defaultText = "尚未輸入資料")
         {
-            return new MvcHtmlString(!string.IsNullOrEmpty(value) ? value : defaultText);
+            var content = string.IsNullOrEmpty(value) ? defaultText : HttpUtility.HtmlEncode(value);
+            return MvcHtmlString.Create(content);
         }
     }
 }
