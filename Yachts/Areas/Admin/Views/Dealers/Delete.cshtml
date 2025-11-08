@@ -9,96 +9,109 @@
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal row g-2 justify-content-evenly">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </dt>
+        <div class="col-4">
+            <dt>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CompanyName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Contact)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Contact)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Contact)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Contact)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
 
-        <dd>
-            @Html.DisplayOrDefault(Model.Address)
-        </dd>
+            <dd>
+                @Html.DisplayOrDefault(Model.Address)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Tel)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tel)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tel)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Tel)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fax)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Fax)
+            </dt>
 
-        <dd>
-            @Html.DisplayOrDefault(Model.Fax)
-        </dd>
+            <dd>
+                @Html.DisplayOrDefault(Model.Fax)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayOrDefault(Model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayOrDefault(Model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Website)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Website)
+            </dt>
 
-        <dd>
-            @Html.DisplayOrDefault(Model.Website)
-        </dd>
+            <dd>
+                @Html.DisplayOrDefault(Model.Website)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CountryCode)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CountryCode)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CountryCode)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.SortOrder)
-        </dt>
+            @*<dt>
+                @Html.DisplayNameFor(model => model.SortOrder)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SortOrder)
-        </dd>*@
-
+            <dd>
+                @Html.DisplayFor(model => model.SortOrder)
+            </dd>*@
+            </div>
+            <div class="col-4">
+                <dd>
+                    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                    {
+                        <img src="@Url.Content(Model.PhotoPath)" alt="Dealer photo" class="img-thumbnail shadow-sm" style="max-width: 300px; border-radius:8px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">尚未上傳圖片</span>
+                    }
+                </dd>
+            </div>
 
 
     </dl>
@@ -107,8 +120,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="確認刪除" class="btn btn-default" /> |
+            @Html.ActionLink("返回列表", "Index")
         </div>
     }
 </div>
