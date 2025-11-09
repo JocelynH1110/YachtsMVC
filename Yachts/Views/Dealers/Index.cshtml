@@ -1,0 +1,80 @@
+﻿@*@model IEnumerable<Yachts.Models.Dealer>*@
+@model MvcPaging.IPagedList<Yachts.Models.Dealer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--------------------------------左邊選單開始---------------------------------------------------->
+<div class="conbg">
+    <!--------------------------------左邊選單開始---------------------------------------------------->
+    <div class="left">
+
+        <div class="left1">
+            <p><span>DEALERS</span></p>
+            <ul>
+                <li><a href="#">Unite States</a></li>
+                <li><a href="#">Europe</a></li>
+                <li><a href="#">Asia</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--------------------------------左邊選單結束---------------------------------------------------->
+    <!--------------------------------右邊選單開始---------------------------------------------------->
+
+    <div id="crumb"><a href="#">Home</a> >> <a href="#">Dealers </a> >> <a href="#"><span class="on1">Unite States</span></a></div>
+    <div class="right">
+        <div class="right1">
+            <div class="title"> <span>Unite States</span></div>
+
+            <!--------------------------------內容開始---------------------------------------------------->
+            <div class="box2_list">
+                <ul>
+
+                    <li>
+                        @foreach (var item in Model)
+                        {
+                            <div class="list02">
+                                <ul>
+
+                                    <li class="list02li">
+                                        <div>
+                                            @if (!string.IsNullOrEmpty(item.PhotoPath))
+                                            {
+                                                <p><img src="@Url.Content(item.PhotoPath)" width="209" /></p>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">尚未上傳圖片</span>
+                                            }
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span>Annapolis</span><br />
+                                        @Html.DisplayFor(modelItem => item.CompanyName)<br />
+                                        Contact： @Html.DisplayFor(modelItem => item.Contact) <br />
+                                        Address： @Html.DisplayFor(modelItem => item.Address) <br />
+                                        TEL： @Html.DisplayFor(modelItem => item.Tel) <br />
+                                        E-mail： @Html.DisplayFor(modelItem => item.Email) <br />
+                                        <a href="@Url.Equals(item.Website)" target="_blank"> @Html.DisplayFor(modelItem => item.Website)</a>
+                                    </li>
+                                </ul>
+                            </div>}
+                    </li>
+                </ul>
+
+            </div>
+
+            <!--------------------------------內容結束------------------------------------------------------>
+        </div>
+
+        @*<div class="pagenumber"> | <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
+            <div class="pagenumber1"> Items：<span>89</span>  |  Pages：<span>1/9</span></div>*@
+        <div class="pagenumber">
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+        </div>
+    </div>
+    <!--------------------------------右邊選單結束---------------------------------------------------->
+</div>
+
+
