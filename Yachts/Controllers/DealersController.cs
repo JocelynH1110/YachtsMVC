@@ -28,7 +28,7 @@ namespace Yachts.Controllers
                 page = 1;
             }
             var dealers=db.Dealers.AsQueryable();
-            var result=dealers.OrderBy(d=>d.CountryCode).ToPagedList(page.Value, pageSize.Value);
+            var result=dealers.OrderBy(d=>d.CountryCode).ToPagedList(page.Value - 1, pageSize.Value);
             return View(result);
         }
     }

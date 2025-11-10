@@ -62,6 +62,9 @@
     <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
     </Reference>
+    <Reference Include="Nager.Country, Version=4.3.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nager.Country.4.3.4\lib\net48\Nager.Country.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -233,6 +236,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Services\" />
     <Folder Include="Uploads\Dealers\" />
   </ItemGroup>
   <ItemGroup>

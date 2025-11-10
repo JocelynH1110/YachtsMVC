@@ -9,9 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Delete.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yachts/Helpers/HtmlHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Helpers/HtmlHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Controllers/DealersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Controllers/DealersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Views/Dealers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Views/Dealers/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +36,9 @@
     "accountId": "171caaef-4397-4d06-b356-000701208e7b"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54286b96e8a646058a7700349888254d6200/be/1a6dc3e8/PagingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -67,9 +70,9 @@
 }]]></component>
   <component name="RunManager">
     <configuration name="Yachts - IIS Express" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../../../Program Files (x86)/IIS Express/iisexpress.exe" />
+      <option name="PROGRAM_PARAMETERS" value="/config:$PROJECT_DIR$/.idea/config/applicationhost.config /site:Yachts /apppool:Clr4IntegratedAppPool" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../Program Files (x86)/IIS Express" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
@@ -84,8 +87,8 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Web" />
-      <option name="PROJECT_TFM" value="" />
-      <browser url="https://localhost:44344/" start="true" />
+      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.8" />
+      <browser url="https://localhost:44344/" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -104,7 +107,7 @@
       <workItem from="1760682703057" duration="438000" />
       <workItem from="1760792083826" duration="360000" />
       <workItem from="1761187949304" duration="1300000" />
-      <workItem from="1762394914151" duration="7094000" />
+      <workItem from="1762394914151" duration="9371000" />
     </task>
     <servers />
   </component>
@@ -132,13 +135,13 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs</url>
-          <line>71</line>
+          <line>77</line>
           <properties documentPath="C:\Users\Jocelyn\source\repos\Yachts\Yachts\Areas\Admin\Controllers\DealersController.cs" containingFunctionPresentation="Method 'Create'">
             <startOffsets>
-              <option value="2041" />
+              <option value="2306" />
             </startOffsets>
             <endOffsets>
-              <option value="2073" />
+              <option value="2338" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />

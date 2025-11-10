@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Yachts.Models;
 using ISO3166;
 using MvcPaging;
+using Nager.Country;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -214,7 +215,7 @@ namespace Yachts.Areas.Admin.Controllers
                 .OrderBy(c => c.Name)
                 .Select(c => new SelectListItem
                 {
-                    Value = c.TwoLetterCode,  // 兩字母代碼: TW
+                    Value = c.Name,  // 兩字母代碼: TW
                     Text = c.Name          // 國家名稱: Taiwan
                 })
                 .ToList();
@@ -223,6 +224,5 @@ namespace Yachts.Areas.Admin.Controllers
 
             return new SelectList(countries, "Value", "Text");
         }
-
     }
 }
