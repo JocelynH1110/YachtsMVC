@@ -99,14 +99,14 @@
         <div class="form-group">
             @Html.LabelForRequired(m => m.Region, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Region, new SelectList(ViewBag.Regions), "請選擇地區", new { @class = "form-control", id = "RegionDropdown" })
+                @Html.DropDownListFor(m => m.Region, new List<SelectListItem>(), "請選擇地區", new { @class = "form-control", id = "RegionDropdown", data_value = Model?.Region ?? "" })
                 @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelForRequired(m => m.CountryCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CountryCode, new List<SelectListItem>(), "請選擇國家", new { @class = "form-control", id = "CountryDropdown" })
+                @Html.DropDownListFor(m => m.CountryCode, new List<SelectListItem>(), "請選擇國家", new { @class = "form-control", id = "CountryDropdown", data_value = Model?.CountryCode ?? "" })
                 @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -147,34 +147,4 @@
     @Html.ActionLink("回上一頁", "Index")
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-        $(function () {
-            $('#RegionDropdown').change(function () {
-                var selectedRegion = $(this).val();
-
-                if (selectedRegion) {
-                    $.ajax({
-                        url: '@Url.Action("GetCountriesByRegion", "Dealers", new { area = "Admin" })',
-                        type: 'GET',
-                        data: { region: selectedRegion },
-                        success: function (countries) {
-                            var countryDropdown = $('#CountryDropdown');
-                            countryDropdown.empty();
-                            countryDropdown.append($('<option>').val('').text('請選擇國家'));
-
-                            $.each(countries, function (i, country) {
-                                countryDropdown.append($('<option>').val(country.Code).text(country.Name));
-                            });
-                        },
-                        error: function () {
-                            alert('載入國家資料失敗，請稍後再試。');
-                        }
-                    });
-                } else {
-                    $('#CountryDropdown').empty().append($('<option>').val('').text('請先選擇地區'));
-                }
-            });
-        });
-</script>
+<script type="module" src="~/Content/country-dropdown.js"></script>

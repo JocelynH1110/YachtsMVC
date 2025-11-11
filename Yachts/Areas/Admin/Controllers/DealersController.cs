@@ -65,17 +65,6 @@ namespace Yachts.Areas.Admin.Controllers
         // GET: Admin/Dealers/Create
         public ActionResult Create()
         {
-            ViewBag.Regions = new SelectList(_countryService.GetRegions());
-      
-            //// 國家下拉選單
-            //var countries=_countryService.GetCountries();
-            //ViewBag.CountryList = new SelectList(countries, "Code", "Name");        
-
-            //// 地區下拉選單
-            //var regions=_countryService.GetRegions();
-            //ViewBag.RegionList = new SelectList(regions);
-
-            //ViewBag.CountryCode = GetCountryList();
             return View();
         }
 
