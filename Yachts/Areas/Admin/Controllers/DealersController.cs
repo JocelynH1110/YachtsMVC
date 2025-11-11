@@ -10,12 +10,14 @@ using Yachts.Models;
 using ISO3166;
 using MvcPaging;
 using Nager.Country;
+using Yachts.Services;
 
 namespace Yachts.Areas.Admin.Controllers
 {
     public class DealersController : Controller
     {
         private DBModelContext db = new DBModelContext();
+        private readonly CountryService _countryService = new CountryService();
 
         // GET: Admin/Dealers
         public ActionResult Index(int? page,int? pageSize,string searchByCompany)
@@ -63,7 +65,17 @@ namespace Yachts.Areas.Admin.Controllers
         // GET: Admin/Dealers/Create
         public ActionResult Create()
         {
-            ViewBag.CountryCode = GetCountryList();
+            ViewBag.Regions = new SelectList(_countryService.GetRegions());
+      
+            //// 國家下拉選單
+            //var countries=_countryService.GetCountries();
+            //ViewBag.CountryList = new SelectList(countries, "Code", "Name");        
+
+            //// 地區下拉選單
+            //var regions=_countryService.GetRegions();
+            //ViewBag.RegionList = new SelectList(regions);
+
+            //ViewBag.CountryCode = GetCountryList();
             return View();
         }
 
@@ -72,7 +84,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile")] Dealer dealer)
+        public ActionResult Create([Bind(Include = "CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile,Region")] Dealer dealer)
         {
             if (ModelState.IsValid)
             {
@@ -101,6 +113,12 @@ namespace Yachts.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            //// 驗證失敗時要重新載入下拉選單
+
+            var regions = _countryService.GetRegions();
+            ViewBag.RegionList = new SelectList(regions);
+
             ViewBag.CountryCode = GetCountryList();
             return View(dealer);
         }
@@ -126,7 +144,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DealerId,CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile")] Dealer dealer)
+        public ActionResult Edit([Bind(Include = "DealerId,CompanyName,Contact,Address,Tel,Fax,Email,Website,SortOrder,CountryCode,PhotoFile,Region")] Dealer dealer)
         {
             if (ModelState.IsValid)
             {
@@ -223,6 +241,12 @@ namespace Yachts.Areas.Admin.Controllers
             countries.Insert(0, new SelectListItem { Value = "", Text = "請選擇國家" });
 
             return new SelectList(countries, "Value", "Text");
+        }
+
+        public JsonResult GetCountriesByRegion(string region)
+        {
+            var countries = _countryService.GetCountriesByRegion(region);
+            return Json(countries, JsonRequestBehavior.AllowGet);
         }
     }
 }

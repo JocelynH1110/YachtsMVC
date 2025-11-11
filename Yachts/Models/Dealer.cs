@@ -55,8 +55,13 @@ namespace Yachts.Models
         [Display(Name = "排列順序")]
         public int SortOrder { get; set; } = 0;
 
+
         [Required]
-        [Display(Name = "國家代碼")]
+        [Display(Name = "地區")]
+        public string Region { get; set; }
+
+        [Required]
+        [Display(Name = "國家")]
         public string CountryCode { get; set; }
 
         // 儲存在資料庫的圖片檔路徑
