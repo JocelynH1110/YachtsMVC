@@ -7,7 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="" />
+    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Yachts/Repositories/DealerRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Areas/Admin/Views/Dealers/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Controllers/DealersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Controllers/DealersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Models/Dealer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Models/Dealer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Services/CountryService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Views/Dealers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Views/Dealers/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Yachts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Yachts.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,12 +37,12 @@
     &quot;assignee&quot;: &quot;JocelynH1110&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/JocelynH1110/YachtsMVC.git",
-    "accountId": "171caaef-4397-4d06-b356-000701208e7b"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JocelynH1110/YachtsMVC.git&quot;,
+    &quot;accountId&quot;: &quot;171caaef-4397-4d06-b356-000701208e7b&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54286b96e8a646058a7700349888254d6200/be/1a6dc3e8/PagingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -38,6 +50,7 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -59,7 +72,8 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "rider.code.cleanup.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -103,12 +117,14 @@
       <workItem from="1760792083826" duration="360000" />
       <workItem from="1761187949304" duration="1300000" />
       <workItem from="1762394914151" duration="10072000" />
+      <workItem from="1762959590735" duration="1754000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -139,19 +155,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Yachts/Areas/Admin/Controllers/DealersController.cs</url>
-          <line>78</line>
-          <properties documentPath="C:\Users\Jocelyn\source\repos\Yachts\Yachts\Areas\Admin\Controllers\DealersController.cs" containingFunctionPresentation="Method 'Create'">
-            <startOffsets>
-              <option value="2355" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2379" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

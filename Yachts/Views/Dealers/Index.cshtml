@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<Yachts.Models.Dealer>*@
-@model MvcPaging.IPagedList<Yachts.Models.Dealer>
+@model IPagedList<Yachts.Models.Dealer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,19 +13,21 @@
         <div class="left1">
             <p><span>DEALERS</span></p>
             <ul>
-                <li><a href="#">Unite States</a></li>
-                <li><a href="#">Europe</a></li>
-                <li><a href="#">Asia</a></li>
+                @foreach (var region in ViewBag.Regions)
+                {
+                    <li><a href="/Dealers?region=@region">@region</a></li>
+                }
             </ul>
         </div>
     </div>
     <!--------------------------------左邊選單結束---------------------------------------------------->
     <!--------------------------------右邊選單開始---------------------------------------------------->
 
-    <div id="crumb"><a href="#">Home</a> >> <a href="#">Dealers </a> >> <a href="#"><span class="on1">Unite States</span></a></div>
+    <div id="crumb"><a href="#">Home</a> >> <a href="#">Dealers </a> >> <a href="#"><span
+                class="on1">Unite States</span></a></div>
     <div class="right">
         <div class="right1">
-            <div class="title"> <span>Unite States</span></div>
+            <div class="title"><span>Unite States</span></div>
 
             <!--------------------------------內容開始---------------------------------------------------->
             <div class="box2_list">
@@ -41,7 +43,7 @@
                                         <div>
                                             @if (!string.IsNullOrEmpty(item.PhotoPath))
                                             {
-                                                <p><img src="@Url.Content(item.PhotoPath)" width="209" /></p>
+                                                <p><img src="@Url.Content(item.PhotoPath)" width="209"/></p>
                                             }
                                             else
                                             {
@@ -50,16 +52,18 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <span>@Html.DisplayFor(modelItem =>item.CountryCode)</span><br />
-                                        @Html.DisplayFor(modelItem => item.CompanyName)<br />
-                                        Contact： @Html.DisplayFor(modelItem => item.Contact) <br />
-                                        Address： @Html.DisplayFor(modelItem => item.Address) <br />
-                                        TEL： @Html.DisplayFor(modelItem => item.Tel) <br />
-                                        E-mail： @Html.DisplayFor(modelItem => item.Email) <br />
-                                        <a href="@Url.Equals(item.Website)" target="_blank"> @Html.DisplayFor(modelItem => item.Website)</a>
+                                        <span>@Html.DisplayFor(modelItem => item.CountryName)</span><br/>
+                                        @Html.DisplayFor(modelItem => item.CompanyName)<br/>
+                                        Contact： @Html.DisplayFor(modelItem => item.Contact) <br/>
+                                        Address： @Html.DisplayFor(modelItem => item.Address) <br/>
+                                        TEL： @Html.DisplayFor(modelItem => item.Tel) <br/>
+                                        E-mail： @Html.DisplayFor(modelItem => item.Email) <br/>
+                                        <a href="@Url.Equals(item.Website)"
+                                           target="_blank"> @Html.DisplayFor(modelItem => item.Website)</a>
                                     </li>
                                 </ul>
-                            </div>}
+                            </div>
+                        }
                     </li>
                 </ul>
 

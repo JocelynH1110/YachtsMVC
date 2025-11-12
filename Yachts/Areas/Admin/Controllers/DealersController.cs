@@ -7,18 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
-using ISO3166;
 using MvcPaging;
-using Nager.Country;
-using Yachts.Services;
 
 namespace Yachts.Areas.Admin.Controllers
 {
     public class DealersController : Controller
     {
         private DBModelContext db = new DBModelContext();
-        private readonly CountryService _countryService = new CountryService();
-
+      
         // GET: Admin/Dealers
         public ActionResult Index(int? page,int? pageSize,string searchByCompany)
         {
@@ -101,14 +97,7 @@ namespace Yachts.Areas.Admin.Controllers
                 db.Dealers.Add(dealer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-
-            //// 驗證失敗時要重新載入下拉選單
-
-            var regions = _countryService.GetRegions();
-            ViewBag.RegionList = new SelectList(regions);
-
-            ViewBag.CountryCode = GetCountryList();
+            }      
             return View(dealer);
         }
 
@@ -124,8 +113,7 @@ namespace Yachts.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Region=_countryService.GetRegions();
-            ViewBag.CountryCode = GetCountryList();
+
             return View(dealer);
         }
 
@@ -179,7 +167,7 @@ namespace Yachts.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CountryCode = GetCountryList();
+       
             return View(dealer);
         }
 
@@ -216,27 +204,6 @@ namespace Yachts.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        private SelectList GetCountryList()
-        {
-            var countries = Country.List
-                .OrderBy(c => c.Name)
-                .Select(c => new SelectListItem
-                {
-                    Value = c.Name,  // 兩字母代碼: TW
-                    Text = c.Name          // 國家名稱: Taiwan
-                })
-                .ToList();
-
-            countries.Insert(0, new SelectListItem { Value = "", Text = "請選擇國家" });
-
-            return new SelectList(countries, "Value", "Text");
-        }
-
-        public JsonResult GetCountriesByRegion(string region)
-        {
-            var countries = _countryService.GetCountriesByRegion(region);
-            return Json(countries, JsonRequestBehavior.AllowGet);
         }
     }
 }
