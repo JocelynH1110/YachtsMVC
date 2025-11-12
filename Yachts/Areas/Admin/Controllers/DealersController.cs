@@ -124,6 +124,7 @@ namespace Yachts.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Region=_countryService.GetRegions();
             ViewBag.CountryCode = GetCountryList();
             return View(dealer);
         }
