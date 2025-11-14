@@ -1,0 +1,130 @@
+﻿@model Yachts.Models.Dealer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>經銷商詳細資料</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal row g-2 my-2 justify-content-evenly">
+
+        <div class="col-4  ">
+            <dt>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Contact)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Contact)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayOrDefault(Model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Fax)
+            </dt>
+
+            <dd>
+                @Html.DisplayOrDefault(Model.Fax)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayOrDefault(Model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Website)
+            </dt>
+
+            <dd>
+                @Html.DisplayOrDefault(Model.Website)
+            </dd>
+
+            @*<dt>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SortOrder)
+        </dd>*@
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Region)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Region)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CountryCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+        </div>
+        <div class="col-4">
+            <dd>
+                @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                {
+                    <img src="@Url.Content(Model.PhotoPath)" alt="Dealer photo" class="img-thumbnail shadow-sm" style="max-width: 300px; border-radius:8px;" />
+                }
+                else
+                {
+                    <span class="text-muted">尚未上傳圖片</span>
+                }
+            </dd>
+        </div>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯", "Edit", new { id = Model.DealerId }) |
+    @Html.ActionLink("返回列表", "Index")
+</p>
