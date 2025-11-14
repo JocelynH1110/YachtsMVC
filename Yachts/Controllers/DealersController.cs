@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using MvcPaging;
 using Yachts.Models;
 using Yachts.Repositories;
@@ -18,7 +19,7 @@ namespace Yachts.Controllers
         }
 
         // GET: Dealers
-        public ActionResult Index(int? page, int? pageSize)
+        public ActionResult Index(int? page, int? pageSize, string region)
         {
             // 一頁幾筆
             if (!pageSize.HasValue)
@@ -31,8 +32,15 @@ namespace Yachts.Controllers
             {
                 page = 1;
             }
+            var dealers = _db.Dealers.AsQueryable();
 
-            var result = _db.Dealers.OrderBy(d => d.CountryCode).ToPagedList(page.Value - 1, pageSize.Value);
+            if (!string.IsNullOrEmpty(region))
+            {
+                dealers = dealers.Where(x => x.Region == region);
+                ViewBag.Region = region;
+            }
+
+            var result = dealers.OrderBy(d => d.CountryCode).ToPagedList(page.Value - 1, pageSize.Value);
 
             ViewBag.Regions = _repo.ListRegions();
             return View(result);

@@ -23,11 +23,17 @@
     <!--------------------------------左邊選單結束---------------------------------------------------->
     <!--------------------------------右邊選單開始---------------------------------------------------->
 
-    <div id="crumb"><a href="#">Home</a> >> <a href="#">Dealers </a> >> <a href="#"><span
-                class="on1">Unite States</span></a></div>
+    <div id="crumb">
+
+        <a href="#">Home</a> >> <a href="/Dealers">Dealers </a> >> <a href="/Dealers?region=@ViewBag.Region">
+            <span class="on1">@ViewBag.Region</span>
+        </a>
+
+    </div>
+
     <div class="right">
         <div class="right1">
-            <div class="title"><span>Unite States</span></div>
+            <div class="title"><span>@ViewBag.Region</span></div>
 
             <!--------------------------------內容開始---------------------------------------------------->
             <div class="box2_list">
@@ -43,7 +49,7 @@
                                         <div>
                                             @if (!string.IsNullOrEmpty(item.PhotoPath))
                                             {
-                                                <p><img src="@Url.Content(item.PhotoPath)" width="209"/></p>
+                                                <p><img src="@Url.Content(item.PhotoPath)" width="209" /></p>
                                             }
                                             else
                                             {
@@ -52,12 +58,12 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <span>@Html.DisplayFor(modelItem => item.CountryName)</span><br/>
-                                        @Html.DisplayFor(modelItem => item.CompanyName)<br/>
-                                        Contact： @Html.DisplayFor(modelItem => item.Contact) <br/>
-                                        Address： @Html.DisplayFor(modelItem => item.Address) <br/>
-                                        TEL： @Html.DisplayFor(modelItem => item.Tel) <br/>
-                                        E-mail： @Html.DisplayFor(modelItem => item.Email) <br/>
+                                        <span>@Html.DisplayFor(modelItem => item.CountryName)</span><br />
+                                        @Html.DisplayFor(modelItem => item.CompanyName)<br />
+                                        Contact： @Html.DisplayFor(modelItem => item.Contact) <br />
+                                        Address： @Html.DisplayFor(modelItem => item.Address) <br />
+                                        TEL： @Html.DisplayFor(modelItem => item.Tel) <br />
+                                        E-mail： @Html.DisplayFor(modelItem => item.Email) <br />
                                         <a href="@Url.Equals(item.Website)"
                                            target="_blank"> @Html.DisplayFor(modelItem => item.Website)</a>
                                     </li>
@@ -75,9 +81,10 @@
         @*<div class="pagenumber"> | <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
             <div class="pagenumber1"> Items：<span>89</span>  |  Pages：<span>1/9</span></div>*@
         <div class="pagenumber">
-            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize)).Options(o => o.AddRouteValue("region", ViewBag.Region))
         </div>
     </div>
+
     <!--------------------------------右邊選單結束---------------------------------------------------->
 </div>
 
