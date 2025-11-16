@@ -8,17 +8,13 @@
 <h2>經銷商列表</h2>
 @using (Html.BeginForm("Index", "Dealers", FormMethod.Get))
 {
-    <span>快速搜尋:</span>
-    <label>公司名稱</label>
+    <label>快速搜尋_公司名稱</label>
     <input type="search" name="searchByCompany" value="@ViewBag.SearchByCompany" />
-    <input type="submit" value="搜尋" />
-}
-@using (Html.BeginForm("Index", "Dealers", FormMethod.Get))
-{
+
     <laber>目前顯示幾筆資料:</laber>
     <input name="pageSize" value="@ViewBag.pageSize" />
+    <input type="submit" value="送出" />
 }
-
 
 <p>
     @Html.ActionLink("新增", "Create")
@@ -116,5 +112,5 @@
 </table>
 
 <div class="pager">
-    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.PageSize))
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.PageSize)).Options(o => o.AddRouteValue("searchByCompany", ViewBag.SearchByCompany))
 </div>

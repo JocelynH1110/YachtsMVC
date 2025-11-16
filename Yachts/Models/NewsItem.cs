@@ -19,7 +19,14 @@ namespace Yachts.Models
 
         [Display(Name = "置頂")] public bool Pinned { get; set; }
 
+        [Display(Name = "建立時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        [Display(Name = "更新時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
+
+
     }
 }

@@ -8,9 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Yachts/Models/NewsItem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yachts/Yachts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Yachts.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54286b96e8a646058a7700349888254d6200/be/1a6dc3e8/PagingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Jocelyn/source/repos/Yachts/Yachts/Models/DBModelContext.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -110,7 +109,7 @@
       <workItem from="1761187949304" duration="1300000" />
       <workItem from="1762394914151" duration="10072000" />
       <workItem from="1762959590735" duration="2240000" />
-      <workItem from="1763302437586" duration="1419000" />
+      <workItem from="1763302437586" duration="2177000" />
     </task>
     <task id="LOCAL-00001" summary="製造麻煩">
       <option name="closed" value="true" />
@@ -120,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762961454557</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add NewsItem model">
+      <option name="closed" value="true" />
+      <created>1763304291786</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763304291786</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,7 +149,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="製造麻煩" />
-    <option name="LAST_COMMIT_MESSAGE" value="製造麻煩" />
+    <MESSAGE value="Add NewsItem model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add NewsItem model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DealersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsItemsController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DealersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,6 +172,10 @@
     <Compile Include="Migrations\202511161440187_CreateNews.cs" />
     <Compile Include="Migrations\202511161440187_CreateNews.Designer.cs">
       <DependentUpon>202511161440187_CreateNews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202511161540451_ChangeUpdatedAtToNewsItem.cs" />
+    <Compile Include="Migrations\202511161540451_ChangeUpdatedAtToNewsItem.Designer.cs">
+      <DependentUpon>202511161540451_ChangeUpdatedAtToNewsItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DBModelContext.cs" />
@@ -213,6 +218,11 @@
     <Content Include="Areas\Admin\Views\Dealers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Dealers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Dealers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsItems\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsItems\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsItems\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsItems\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsItems\Index.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
@@ -290,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202511161440187_CreateNews.resx">
       <DependentUpon>202511161440187_CreateNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202511161540451_ChangeUpdatedAtToNewsItem.resx">
+      <DependentUpon>202511161540451_ChangeUpdatedAtToNewsItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

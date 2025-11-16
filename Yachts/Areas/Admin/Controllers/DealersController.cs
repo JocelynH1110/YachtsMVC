@@ -18,7 +18,7 @@ namespace Yachts.Areas.Admin.Controllers
         // GET: Admin/Dealers
         public ActionResult Index(int? page,int? pageSize,string searchByCompany)
         {
-            // 一筆幾頁
+            // 一頁幾筆
             if (!pageSize.HasValue)
             {
                 pageSize = 20;
