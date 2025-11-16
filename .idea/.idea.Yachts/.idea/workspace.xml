@@ -7,7 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="" />
+    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Yachts/Models/NewsItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Yachts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Yachts.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +58,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/dealers/page",
+    "git-widget-placeholder": "feature/news/page",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -106,6 +110,7 @@
       <workItem from="1761187949304" duration="1300000" />
       <workItem from="1762394914151" duration="10072000" />
       <workItem from="1762959590735" duration="2240000" />
+      <workItem from="1763302437586" duration="1419000" />
     </task>
     <task id="LOCAL-00001" summary="製造麻煩">
       <option name="closed" value="true" />
