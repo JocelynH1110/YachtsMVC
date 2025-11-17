@@ -185,6 +185,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Migrations\202510240906564_CreateDealers.cs" />
     <Compile Include="Migrations\202510240906564_CreateDealers.Designer.cs">
       <DependentUpon>202510240906564_CreateDealers.cs</DependentUpon>

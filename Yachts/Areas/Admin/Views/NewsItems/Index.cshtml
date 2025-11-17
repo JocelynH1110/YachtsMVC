@@ -1,5 +1,6 @@
 ﻿@*@model IEnumerable<Yachts.Models.NewsItem>*@
 @model MvcPaging.IPagedList<Yachts.Models.NewsItem>
+@using Yachts.Helpers
 
 @{
     ViewBag.Title = "Index";
@@ -33,9 +34,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedAt)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().UpdatedAt)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -48,15 +49,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
+            <td>               
+                @item.Content.Truncate(30)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("編輯", "Edit", new { id = item.NewsId }) |
                 @Html.ActionLink("詳細資料", "Details", new { id = item.NewsId }) |
