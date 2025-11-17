@@ -71,6 +71,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]    // 允許 HTML（但請在儲存前 sanitize）
         public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem)
         {
             newsItem.CreatedAt=DateTime.Now;
