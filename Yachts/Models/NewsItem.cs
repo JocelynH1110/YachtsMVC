@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Yachts.Models
 {
@@ -12,6 +13,7 @@ namespace Yachts.Models
         [StringLength(255)]
         public string Title { get; set; }
 
+        [AllowHtml]
         [Display(Name = "內容")]
         [Required(ErrorMessage = "請輸入內容")]
         [StringLength(65535)]

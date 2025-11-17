@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
 using MvcPaging;
+using Ganss.Xss;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -77,6 +78,11 @@ namespace Yachts.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                var sanitizer=new HtmlSanitizer();
+
+                // CKEditor 內容進行過濾
+                newsItem.Content=sanitizer.Sanitize(newsItem.Content);
+
                 db.NewsItems.Add(newsItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
