@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Yachts.Models;
 using MvcPaging;
 using Ganss.Xss;
+using System.IO;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -17,7 +18,7 @@ namespace Yachts.Areas.Admin.Controllers
         private DBModelContext db = new DBModelContext();
 
         // GET: Admin/NewsItems
-        public ActionResult Index(int? page,int?pageSize,string searchByTitle)
+        public ActionResult Index(int? page, int? pageSize, string searchByTitle)
         {
             // 目前頁數
             if (!page.HasValue)
@@ -34,13 +35,13 @@ namespace Yachts.Areas.Admin.Controllers
 
             var newsItems = db.NewsItems.AsQueryable();
 
-            if(!string.IsNullOrEmpty(searchByTitle))
+            if (!string.IsNullOrEmpty(searchByTitle))
             {
-                newsItems=newsItems.Where(n=>n.Title.Contains(searchByTitle));
+                newsItems = newsItems.Where(n => n.Title.Contains(searchByTitle));
                 ViewBag.SearchByTitle = searchByTitle;
             }
 
-            var result=newsItems.OrderByDescending(n=>n.CreatedAt).ThenByDescending(n=>n.UpdatedAt).ToPagedList(page.Value-1,pageSize.Value);
+            var result = newsItems.OrderByDescending(n => n.CreatedAt).ThenByDescending(n => n.UpdatedAt).ToPagedList(page.Value - 1, pageSize.Value);
 
             return View(result);
         }
@@ -74,15 +75,15 @@ namespace Yachts.Areas.Admin.Controllers
         [ValidateInput(false)]    // 允許 HTML（但請在儲存前 sanitize）
         public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem)
         {
-            newsItem.CreatedAt=DateTime.Now;
-            newsItem.UpdatedAt=null;
+            newsItem.CreatedAt = DateTime.Now;
+            newsItem.UpdatedAt = null;
 
             if (ModelState.IsValid)
             {
-                var sanitizer=new HtmlSanitizer();
+                var sanitizer = new HtmlSanitizer();
 
                 // CKEditor 內容進行過濾
-                newsItem.Content=sanitizer.Sanitize(newsItem.Content);
+                newsItem.Content = sanitizer.Sanitize(newsItem.Content);
 
                 db.NewsItems.Add(newsItem);
                 db.SaveChanges();
@@ -91,6 +92,29 @@ namespace Yachts.Areas.Admin.Controllers
 
             return View(newsItem);
         }
+
+        // 圖片上傳 API
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase uplaod)
+        {
+            if ((uplaod != null) && uplaod.ContentLength > 0)
+            {
+                string fileName = Path.GetFileName(uplaod.FileName);
+                string path = Path.Combine(Server.MapPath("~/Uploads/News/"), fileName);
+                uplaod.SaveAs(path);
+
+                // 回傳給 CKEditor 的格式固定如下：
+                return Json(new
+                {
+                    uploaded = 1,
+                    fileName = fileName,
+                    url = Url.Content("~/Uploads/News/" + fileName)
+                });
+            }
+            // 上傳失敗時
+            return Json(new { uploaded = 0, error = new { message = "上傳失敗" } });
+        }
+        
 
         // GET: Admin/NewsItems/Edit/5
         public ActionResult Edit(int? id)
