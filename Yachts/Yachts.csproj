@@ -181,6 +181,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\DealersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,6 +285,8 @@
     <Content Include="Views\Dealers\Index.cshtml" />
     <Content Include="Views\Company\AboutUs.cshtml" />
     <Content Include="Views\Company\Certificate.cshtml" />
+    <Content Include="Views\NewsItems\Index.cshtml" />
+    <Content Include="Views\NewsItems\Content.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

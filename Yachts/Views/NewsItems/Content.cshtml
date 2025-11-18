@@ -1,0 +1,54 @@
+﻿@model Yachts.Models.NewsItem
+
+@{
+    ViewBag.Title = "Content";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="conbg">
+    <!--------------------------------左邊選單開始---------------------------------------------------->
+    <div class="left">
+
+        <div class="left1">
+            <p><span>NEWS</span></p>
+            <ul>
+                <li><a href="~/NewsItems/Index">News & Events</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--------------------------------左邊選單結束---------------------------------------------------->
+    <!--------------------------------右邊選單開始---------------------------------------------------->
+    <div id="crumb"><a href="/">Home</a> >> <a href="~/NewsItems/Index">News </a> >> <a href="#"><span class="on1">Content</span></a></div>
+    <div class="right">
+        <div class="right1">
+            <div class="title"> <span>News & Events</span></div>
+            @*@foreach (var item in Model)
+            {*@
+                <!--------------------------------內容開始---------------------------------------------------->
+                <div class="box3">
+                    <h4> @Html.Display(Model.Title)</h4>
+                    <p><img src="images/pit009.jpg" alt="&quot;&quot;" /></p>
+                    @Html.Raw(Model.Content)
+                </div>
+
+                <!--下載開始-->
+                <div class="downloads">
+                    <p><img src="images/downloads.gif" alt="&quot;&quot;" /></p>
+                    <ul>
+                        <li><a href="#">Downloads 001</a></li>
+                        <li><a href="#">Downloads 001</a></li>
+                        <li><a href="#">Downloads 001</a></li>
+                        <li><a href="#">Downloads 001</a></li>
+                        <li><a href="#">Downloads 001</a></li>
+                    </ul>
+                </div>
+                <!--下載結束-->
+
+                <div class="buttom001"><a href="#"><img src="images/back.gif" alt="&quot;&quot;" width="55" height="28" /></a></div>
+            
+            <!--------------------------------內容結束------------------------------------------------------>
+        </div>
+    </div>
+
+    <!--------------------------------右邊選單結束---------------------------------------------------->
+</div>

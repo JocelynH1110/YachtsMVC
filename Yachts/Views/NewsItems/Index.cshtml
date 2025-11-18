@@ -1,0 +1,62 @@
+﻿@*@model IEnumerable<Yachts.Models.NewsItem>*@
+@model IPagedList<Yachts.Models.NewsItem>
+@using Yachts.Helpers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="conbg">
+    <!--------------------------------左邊選單開始---------------------------------------------------->
+    <div class="left">
+
+        <div class="left1">
+            <p><span>NEWS</span></p>
+            <ul>
+                <li><a href="#">News & Events</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--------------------------------左邊選單結束---------------------------------------------------->
+    <!--------------------------------右邊選單開始---------------------------------------------------->
+    <div id="crumb"><a href="/">Home</a> >> <a href="~/NewsItems/Index">News </a> >> <a href="#"><span class="on1">News & Events</span></a></div>
+    <div class="right">
+        <div class="right1">
+            <div class="title"> <span>News & Events</span></div>
+
+            <!--------------------------------內容開始---------------------------------------------------->
+            <div class="box2_list">
+                <ul>
+                    <li>
+                        @foreach (var item in Model)
+                        {
+                            <div class="list01">
+                                <ul>
+                                    <li><div><p><img src="images/pit006.jpg" alt="&quot;&quot;" /></p></div></li>
+                                    <li>
+                                        <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                                        <a href="~/NewsItems/Content/@Html.DisplayFor(modelItem=>item.NewsId)">
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </a><br />
+                                    </li>
+                                   
+                                    <li> @item.Content.Truncate(30)</li>
+                                </ul>
+                            </div>
+                        }
+                    </li>
+                </ul>
+
+                @*<div class="pagenumber"> | <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
+                    <div class="pagenumber1"> Items：<span>89</span>  |  Pages：<span>1/9</span></div>*@
+                <div class="pagenumber">
+                    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize))
+                </div>
+
+            </div>
+            <!--------------------------------內容結束------------------------------------------------------>
+        </div>
+    </div>
+    <!--------------------------------右邊選單結束---------------------------------------------------->
+</div>
