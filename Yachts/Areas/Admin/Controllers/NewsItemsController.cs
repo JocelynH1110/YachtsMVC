@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Ganss.Xss;
+using MvcPaging;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using Yachts.Models;
-using MvcPaging;
-using Ganss.Xss;
-using System.IO;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -95,7 +96,7 @@ namespace Yachts.Areas.Admin.Controllers
 
         // 圖片上傳 API
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase uplaod)
+        public ActionResult UploadImage(HttpPostedFileBase uplaod,string CKEditorFuncNum,string CKEditor, string langCode)
         {
             if ((uplaod != null) && uplaod.ContentLength > 0)
             {
@@ -103,16 +104,21 @@ namespace Yachts.Areas.Admin.Controllers
                 string path = Path.Combine(Server.MapPath("~/Uploads/News/"), fileName);
                 uplaod.SaveAs(path);
 
-                // 回傳給 CKEditor 的格式固定如下：
-                return Json(new
-                {
-                    uploaded = 1,
-                    fileName = fileName,
-                    url = Url.Content("~/Uploads/News/" + fileName)
-                });
+                var url=Url.Content(path);
+                var msg = "上傳成功";
+
+                return Content("<script>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", '" + url + "', '" + msg + "');</script>");
+                //// 回傳給 CKEditor 的格式固定如下：
+                //return Json(new
+                //{
+                //    uploaded = 1,
+                //    fileName = fileName,
+                //    url = Url.Content("~/Uploads/News/" + fileName)
+                //});
             }
+            return HttpNotFound();
             // 上傳失敗時
-            return Json(new { uploaded = 0, error = new { message = "上傳失敗" } });
+            //return Json(new { uploaded = 0, error = new { message = "上傳失敗" } });
         }
         
 
@@ -127,7 +133,7 @@ namespace Yachts.Areas.Admin.Controllers
             if (newsItem == null)
             {
                 return HttpNotFound();
-            }
+            }          
             return View(newsItem);
         }
 
@@ -136,7 +142,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned,CreatedAt,UpdatedAt")] NewsItem newsItem)
+        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem)
         {
             if (ModelState.IsValid)
             {

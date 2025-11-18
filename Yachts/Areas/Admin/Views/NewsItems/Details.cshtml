@@ -5,12 +5,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>新聞內容</h2>
 
 <div>
-    <h4>NewsItem</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pinned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pinned)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -24,15 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pinned)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pinned)
+            @Html.Raw(Model.Content)
         </dd>
 
         <dt>
@@ -54,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.NewsId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("編輯", "Edit", new { id = Model.NewsId }) |
+    @Html.ActionLink("返回列表", "Index")
 </p>

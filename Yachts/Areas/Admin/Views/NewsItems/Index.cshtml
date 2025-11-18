@@ -49,7 +49,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>               
+            <td>
+                @*@Html.Raw(item.Content)*@
                 @item.Content.Truncate(30)
             </td>
             <td>
