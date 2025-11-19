@@ -32,6 +32,9 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().Content)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Attachments)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().CreatedAt)
         </th>
         @*<th>
@@ -54,11 +57,24 @@
                 @item.Content.Truncate(30)
             </td>
             <td>
+                @if (item.Attachments != null)
+                {
+                    <ul>
+                        @foreach (var att in item.Attachments)
+                        {
+                            <li>
+                                <a href="@Url.Content(att.FilePath)" download>@att.FileName</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>*@
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>*@
             <td>
                 @Html.ActionLink("編輯", "Edit", new { id = item.NewsId }) |
                 @Html.ActionLink("詳細資料", "Details", new { id = item.NewsId }) |

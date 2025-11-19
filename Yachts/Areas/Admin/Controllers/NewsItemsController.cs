@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using Yachts.Models;
+using Yachts.Helpers;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -74,13 +75,29 @@ namespace Yachts.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]    // 允許 HTML（但請在儲存前 sanitize）
-        public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem)
+        public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem, IEnumerable<HttpPostedFileBase> Files)
         {
             newsItem.CreatedAt = DateTime.Now;
             newsItem.UpdatedAt = null;
 
             if (ModelState.IsValid)
             {
+                // 建立附件集合，不然會報 NullReferenceException
+                newsItem.Attachments = new List<NewsAttachment>();
+
+                // 1.呼叫 Helper 儲存檔案
+                var savedPaths = UploadHelper.SaveFiles(Files, "~/Uploads/News");
+
+                // 2. 每個檔案建立一個 NewsAttachment
+                foreach (var path in savedPaths)
+                {
+                    newsItem.Attachments.Add(new NewsAttachment
+                    {
+                        FileName = Path.GetFileName(path),
+                        FilePath = path
+                    });
+                }
+
                 var sanitizer = new HtmlSanitizer();
 
                 // CKEditor 內容進行過濾
@@ -90,7 +107,6 @@ namespace Yachts.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(newsItem);
         }
 

@@ -31,6 +31,7 @@ namespace Yachts.Models
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // 一筆新聞可以有多個附件
+        [Display(Name = "附件")]
         public virtual ICollection<NewsAttachment> Attachments { get; set; }
     }
 }
