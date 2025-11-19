@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -22,13 +23,14 @@ namespace Yachts.Models
         [Display(Name = "置頂")] public bool Pinned { get; set; }
 
         [Display(Name = "建立時間")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Display(Name = "更新時間")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
-
+        // 一筆新聞可以有多個附件
+        public virtual ICollection<NewsAttachment> Attachments { get; set; }
     }
 }
