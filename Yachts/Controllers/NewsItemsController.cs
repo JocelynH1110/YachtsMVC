@@ -30,7 +30,10 @@ namespace Yachts.Controllers
             var newsItems = _db.NewsItems.AsQueryable();
 
             var result = newsItems.OrderByDescending(d => d.CreatedAt).ToPagedList(page.Value - 1, pageSize.Value);
-
+           
+            ViewBag.Count = _db.NewsItems.Count();
+            ViewBag.CurrentPage = result.PageNumber;
+            ViewBag.LastPage = result.PageCount;
             return View(result);
         }
 

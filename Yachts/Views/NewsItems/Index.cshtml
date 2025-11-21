@@ -33,14 +33,14 @@
                         {
                             <div class="list01">
                                 <ul>
-                                    <li><div><p><img src="images/pit006.jpg" alt="&quot;&quot;" /></p></div></li>
+                                    <li><div><p><img src="~/Images/pit006.jpg" alt="&quot;&quot;" /></p></div></li>
                                     <li>
                                         <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span><br />
                                         <a href="~/NewsItems/Content/@Html.DisplayFor(modelItem=>item.NewsId)">
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </a><br />
                                     </li>
-                                   
+
                                     <li> @item.Content.Truncate(200)</li>
                                 </ul>
                             </div>
@@ -50,13 +50,16 @@
 
                 @*<div class="pagenumber"> | <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
                     <div class="pagenumber1"> Items：<span>89</span>  |  Pages：<span>1/9</span></div>*@
-                <div class="pagenumber">
-                    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize))
+            <div class="pagenumber">
+                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize))
+                <div class="pagenumber1">
+                    Items：<span>共 @ViewBag.Count 筆資料</span>  |
+                    Pages：<span>@ViewBag.CurrentPage/@ViewBag.LastPage</span>
                 </div>
 
             </div>
-            <!--------------------------------內容結束------------------------------------------------------>
+                <!--------------------------------內容結束------------------------------------------------------>
+            </div>
         </div>
+        <!--------------------------------右邊選單結束---------------------------------------------------->
     </div>
-    <!--------------------------------右邊選單結束---------------------------------------------------->
-</div>
