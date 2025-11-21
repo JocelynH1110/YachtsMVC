@@ -4,6 +4,13 @@
     ViewBag.Title = "Content";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .ck-content p,
+    .ck-content div {
+        float: none !important;
+        border: none !important;
+    }
+</style>
 
 <div class="conbg">
     <!--------------------------------左邊選單開始---------------------------------------------------->
@@ -22,30 +29,28 @@
     <div class="right">
         <div class="right1">
             <div class="title"> <span>News & Events</span></div>
-            @*@foreach (var item in Model)
-            {*@
-                <!--------------------------------內容開始---------------------------------------------------->
-                <div class="box3">
-                    <h4> @Html.Display(Model.Title)</h4>
-                    <p><img src="images/pit009.jpg" alt="&quot;&quot;" /></p>
+
+            <!--------------------------------內容開始---------------------------------------------------->
+            <div class="box3">
+                <h4>@Html.DisplayFor(model => model.Title)</h4>       
+                <div class="ck-content">
                     @Html.Raw(Model.Content)
                 </div>
 
-                <!--下載開始-->
-                <div class="downloads">
-                    <p><img src="images/downloads.gif" alt="&quot;&quot;" /></p>
+            <!--下載開始-->
+                <div class="ck-content downloads">
+                    <p><img src="~/Images/downloads.gif" alt="&quot;&quot;" /></p>
                     <ul>
-                        <li><a href="#">Downloads 001</a></li>
-                        <li><a href="#">Downloads 001</a></li>
-                        <li><a href="#">Downloads 001</a></li>
-                        <li><a href="#">Downloads 001</a></li>
-                        <li><a href="#">Downloads 001</a></li>
+                        @foreach (var item in Model.Attachments)
+                        {
+                            <li><a href="@Url.Content(item.FilePath)" download>@item.FileName</a></li>
+                        }
                     </ul>
                 </div>
-                <!--下載結束-->
+            <!--下載結束-->
 
-                <div class="buttom001"><a href="#"><img src="images/back.gif" alt="&quot;&quot;" width="55" height="28" /></a></div>
-            
+            <div class="buttom001"><a href="#"><img src="~/Images/back.gif" alt="&quot;&quot;" width="55" height="28" /></a></div>
+
             <!--------------------------------內容結束------------------------------------------------------>
         </div>
     </div>

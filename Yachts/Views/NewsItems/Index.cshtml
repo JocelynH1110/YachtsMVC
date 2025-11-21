@@ -35,13 +35,13 @@
                                 <ul>
                                     <li><div><p><img src="images/pit006.jpg" alt="&quot;&quot;" /></p></div></li>
                                     <li>
-                                        <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span>
+                                        <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span><br />
                                         <a href="~/NewsItems/Content/@Html.DisplayFor(modelItem=>item.NewsId)">
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </a><br />
                                     </li>
                                    
-                                    <li> @item.Content.Truncate(30)</li>
+                                    <li> @item.Content.Truncate(200)</li>
                                 </ul>
                             </div>
                         }

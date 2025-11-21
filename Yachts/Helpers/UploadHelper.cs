@@ -8,7 +8,7 @@ namespace Yachts.Helpers
 {
     public static class UploadHelper
     {
-        public static List<string> SaveFiles(IEnumerable<HttpPostedFileBase > files, string folder)
+        public static List<string> SaveFiles(IEnumerable<HttpPostedFileBase> files, string folder)
         {
             var results=new List<string>();
 
