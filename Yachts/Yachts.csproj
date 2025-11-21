@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202511190738137_AddFilePathToNewsItemAndCreateNewsAttachment.Designer.cs">
       <DependentUpon>202511190738137_AddFilePathToNewsItemAndCreateNewsAttachment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202511210932551_AddCoverPhotoPathToNewsItem.cs" />
+    <Compile Include="Migrations\202511210932551_AddCoverPhotoPathToNewsItem.Designer.cs">
+      <DependentUpon>202511210932551_AddCoverPhotoPathToNewsItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DBModelContext.cs" />
     <Compile Include="Models\Dealer.cs" />
@@ -345,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202511190738137_AddFilePathToNewsItemAndCreateNewsAttachment.resx">
       <DependentUpon>202511190738137_AddFilePathToNewsItemAndCreateNewsAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202511210932551_AddCoverPhotoPathToNewsItem.resx">
+      <DependentUpon>202511210932551_AddCoverPhotoPathToNewsItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

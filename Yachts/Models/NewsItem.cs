@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Yachts.Models
@@ -21,6 +23,14 @@ namespace Yachts.Models
         public string Content { get; set; }
 
         [Display(Name = "置頂")] public bool Pinned { get; set; }
+
+        // 儲存在資料庫的圖片檔路徑
+        [Display(Name = "封面照片")]
+        [StringLength(255)]
+        public string CoverPhotoPath { get; set; }
+
+        // 不存進資料庫，用來接收使用者上傳檔案
+        [NotMapped] public HttpPostedFileBase CoverPhotoFile { get; set; }
 
         [Display(Name = "建立時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
