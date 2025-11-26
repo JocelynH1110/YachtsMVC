@@ -26,6 +26,9 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().Pinned)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CoverPhotoPath)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
         </th>
         <th>
@@ -48,6 +51,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Pinned)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.CoverPhotoPath))
+                {
+                    <img src="@Url.Content(item.CoverPhotoPath)" width="50" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

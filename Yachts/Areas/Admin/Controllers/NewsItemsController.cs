@@ -7,11 +7,12 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
-using Yachts.Models;
 using Yachts.Helpers;
+using Yachts.Models;
 
 namespace Yachts.Areas.Admin.Controllers
 {
@@ -75,13 +76,18 @@ namespace Yachts.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]    // 允許 HTML（但請在儲存前 sanitize）
-        public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem, IEnumerable<HttpPostedFileBase> Files)
+        public ActionResult Create([Bind(Include = "NewsId,Title,Content,Pinned,CoverPhotoFile,CoverPhotoPath")] NewsItem newsItem, IEnumerable<HttpPostedFileBase> Files)
         {
-            newsItem.CreatedAt = DateTime.Now;
-            newsItem.UpdatedAt = null;
+            var f1 = Request.Files;
+            var f2 = Request.Files["CoverPhotoFile"];
+            var f3 = newsItem.CoverPhotoFile;
 
             if (ModelState.IsValid)
             {
+                newsItem.CreatedAt = DateTime.Now;
+                newsItem.UpdatedAt = null;
+
+                //上傳檔案
                 // 建立附件集合，不然會報 NullReferenceException
                 newsItem.Attachments = new List<NewsAttachment>();
 
@@ -102,6 +108,24 @@ namespace Yachts.Areas.Admin.Controllers
 
                 // CKEditor 內容進行過濾
                 newsItem.Content = sanitizer.Sanitize(newsItem.Content);
+
+                // 上傳封面照片
+                if (newsItem.CoverPhotoFile != null && newsItem.CoverPhotoFile.ContentLength > 0)
+                {
+                    // 取得檔名（避免重名）
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(newsItem.CoverPhotoFile.FileName);
+                    string uploadDir = Server.MapPath("~/Uploads/News/CoverPhotos");
+
+                    // 如果資料夾不存在就建立
+                    if (!Directory.Exists(uploadDir))
+                        Directory.CreateDirectory(uploadDir);
+
+                    string filePath = Path.Combine(uploadDir, fileName);
+                    newsItem.CoverPhotoFile.SaveAs(filePath);
+
+                    // 存相對路徑到 DB
+                    newsItem.CoverPhotoPath = "/Uploads/News/CoverPhotos/" + fileName;
+                }
 
                 db.NewsItems.Add(newsItem);
                 db.SaveChanges();
@@ -158,11 +182,44 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned")] NewsItem newsItem)
+        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned,CoverPhotoFile")] NewsItem newsItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(newsItem).State = EntityState.Modified;
+                //db.Entry(newsItem).State = EntityState.Modified;
+
+                var dbnewsItem = db.NewsItems.Find(newsItem.NewsId);
+                if (dbnewsItem == null)
+                    return HttpNotFound();
+
+                dbnewsItem.Title = newsItem.Title;
+                dbnewsItem.Content = newsItem.Content;
+                dbnewsItem.Pinned = newsItem.Pinned;
+                dbnewsItem.UpdatedAt = DateTime.Now;         
+
+                // 如果有重新上傳新照片
+                if (newsItem.CoverPhotoFile != null && newsItem.CoverPhotoFile.ContentLength > 0)
+                {
+                    try
+                    {
+                        string fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(newsItem.CoverPhotoFile.FileName);
+                        string uploadDir = Server.MapPath("~/Uploads/News/CoverPhotos");
+
+                        if (!System.IO.Directory.Exists(uploadDir))
+                            System.IO.Directory.CreateDirectory(uploadDir);
+
+                        string filePath = System.IO.Path.Combine(uploadDir, fileName);
+                        newsItem.CoverPhotoFile.SaveAs(filePath);
+
+                        dbnewsItem.CoverPhotoPath = "/Uploads/News/CoverPhotos/" + fileName;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        ModelState.AddModelError("", "圖片上傳失敗：" + ex.Message);
+                    }
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

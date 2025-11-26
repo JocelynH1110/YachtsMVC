@@ -1,5 +1,5 @@
 ﻿@model Yachts.Models.NewsItem
- 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -23,6 +23,15 @@
         </div>
     </div>
 
+    <!-- 上傳照片 -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.CoverPhotoFile, "上傳封面照片", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="CoverPhotoFile" class="form-control" accept="image/*" />
+            @Html.ValidationMessageFor(m => m.CoverPhotoFile)
+        </div>
+    </div>
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelForRequired(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -32,14 +41,13 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("Create", "NewsItem", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="form-group">
-            @Html.LabelForRequired(model => model.Attachments)
-            <input type="file" name="Files" multiple="multiple" class="form-control" />
-            @Html.ValidationMessageFor(model => model.Attachments)
-        </div>
-    }
+    <!-- 附件 -->
+    <div class="form-group">
+        @Html.LabelForRequired(model => model.Attachments)
+        <input type="file" name="Files" multiple="multiple" class="form-control" />
+        @Html.ValidationMessageFor(model => model.Attachments)
+    </div>
+
 
 
     <div class="form-group">
