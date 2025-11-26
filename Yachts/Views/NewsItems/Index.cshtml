@@ -33,7 +33,7 @@
                         {
                             <div class="list01">
                                 <ul>
-                                    <li><div><p><img src="~/Images/pit006.jpg" alt="&quot;&quot;" /></p></div></li>
+                                    <li><div><p><img src="@Url.Content(string.IsNullOrEmpty(item.CoverPhotoPath)?"https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1600272714337.jpg":item.CoverPhotoPath)" alt="cover photo" style="width: 200px; height: 200px; object-fit: contain; object-position: top;"></p></div></li>
                                     <li>
                                         <span>@Html.DisplayFor(modelItem => item.CreatedAt)</span><br />
                                         <a href="~/NewsItems/Content/@Html.DisplayFor(modelItem=>item.NewsId)">
@@ -50,14 +50,15 @@
 
                 @*<div class="pagenumber"> | <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
                     <div class="pagenumber1"> Items：<span>89</span>  |  Pages：<span>1/9</span></div>*@
-            <div class="pagenumber">
-                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize))
-                <div class="pagenumber1">
-                    Items：<span>共 @ViewBag.Count 筆資料</span>  |
-                    Pages：<span>@ViewBag.CurrentPage/@ViewBag.LastPage</span>
+                <div class="pagenumber">
+                    <div class="pagenumber1">
+                        <span>共 @ViewBag.Count 筆資料</span>  |
+                        <span>目前頁面：@ViewBag.CurrentPage/@ViewBag.LastPage</span>
+                    </div>
+                    <div class="pagination">
+                        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("pageSize", ViewBag.pageSize))
+                    </div>
                 </div>
-
-            </div>
                 <!--------------------------------內容結束------------------------------------------------------>
             </div>
         </div>
