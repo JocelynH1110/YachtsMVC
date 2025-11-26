@@ -92,7 +92,7 @@ namespace Yachts.Areas.Admin.Controllers
                 newsItem.Attachments = new List<NewsAttachment>();
 
                 // 1.呼叫 Helper 儲存檔案
-                var savedPaths = UploadHelper.SaveFiles(Files, "~/Uploads/News");
+                var savedPaths = UploadHelper.SaveFiles(Files, "~/Uploads/News/Attachments/");
 
                 // 2. 每個檔案建立一個 NewsAttachment
                 foreach (var path in savedPaths)
@@ -182,7 +182,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned,CoverPhotoFile")] NewsItem newsItem)
+        public ActionResult Edit([Bind(Include = "NewsId,Title,Content,Pinned,CoverPhotoFile")] NewsItem newsItem,IEnumerable<HttpPostedFileBase> Files, int[] DeleteAttachmentIds)
         {
             if (ModelState.IsValid)
             {
@@ -217,6 +217,49 @@ namespace Yachts.Areas.Admin.Controllers
                     {
 
                         ModelState.AddModelError("", "圖片上傳失敗：" + ex.Message);
+                    }
+                }
+
+                /* 1. 刪除附件 */
+                if (DeleteAttachmentIds != null)
+                {
+                    foreach (var id in DeleteAttachmentIds)
+                    {
+                        var att = dbnewsItem.Attachments.FirstOrDefault(a => a.AttachmentId == id);
+                        if (att != null)
+                        {
+                            // 刪除實體檔案
+                            var fullPath = Server.MapPath(att.FilePath);
+                            if (System.IO.File.Exists(fullPath))
+                                System.IO.File.Delete(fullPath);
+
+                            // 刪除資料
+                            db.Entry(att).State=EntityState.Deleted;
+                        }
+                    }
+                }
+                /* 2. 新增新上傳附件 */
+                if (Files != null)
+                {
+                    string uploadPath = Server.MapPath("~/Uploads/News/Attachments/");
+                    if (!Directory.Exists(uploadPath))
+                        Directory.CreateDirectory(uploadPath);
+
+                    foreach (var file in Files)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            string fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            string fullPath = Path.Combine(uploadPath, fileName);
+
+                            file.SaveAs(fullPath);
+
+                            dbnewsItem.Attachments.Add(new NewsAttachment
+                            {
+                                FileName = file.FileName,
+                                FilePath = "/Uploads/News/Attachments/" + fileName
+                            });
+                        }
                     }
                 }
 
