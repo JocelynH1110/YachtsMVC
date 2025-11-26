@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\DealersController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsItemsController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DealersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsItemsController.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Views\Company\Certificate.cshtml" />
     <Content Include="Views\NewsItems\Index.cshtml" />
     <Content Include="Views\NewsItems\Content.cshtml" />
+    <Content Include="Views\Contact\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
