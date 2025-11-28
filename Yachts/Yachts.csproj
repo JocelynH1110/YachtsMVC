@@ -217,7 +217,12 @@
     <Compile Include="Migrations\202511210932551_AddCoverPhotoPathToNewsItem.Designer.cs">
       <DependentUpon>202511210932551_AddCoverPhotoPathToNewsItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202511280401403_CreateContactForm.cs" />
+    <Compile Include="Migrations\202511280401403_CreateContactForm.Designer.cs">
+      <DependentUpon>202511280401403_CreateContactForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\DBModelContext.cs" />
     <Compile Include="Models\Dealer.cs" />
     <Compile Include="Models\NewsAttachment.cs" />
@@ -354,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202511210932551_AddCoverPhotoPathToNewsItem.resx">
       <DependentUpon>202511210932551_AddCoverPhotoPathToNewsItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202511280401403_CreateContactForm.resx">
+      <DependentUpon>202511280401403_CreateContactForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
