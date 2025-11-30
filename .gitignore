@@ -364,4 +364,6 @@ FodyWeavers.xsd
 
 /Yachts/Uploads
 
-/Yachts/Web.config
+/Yachts/Web.*.config
+
+.env
