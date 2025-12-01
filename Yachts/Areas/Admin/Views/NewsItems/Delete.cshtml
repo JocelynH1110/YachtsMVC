@@ -1,0 +1,80 @@
+﻿@model Yachts.Models.NewsItem
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>刪除新聞</h2>
+
+<h3>確定要刪除嗎?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal row g-2 justify-content-evenly">
+        <div class="col-4">
+            <dt>
+                @Html.DisplayNameFor(model => model.Pinned)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Pinned)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Content)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+        </div>
+
+        <div class="col-4">
+            <dd>
+                @if (!string.IsNullOrEmpty(Model.CoverPhotoPath))
+                {
+                    <img src="@Url.Content(Model.CoverPhotoPath)" alt="Dealer photo" class="img-thumbnail shadow-sm" style="max-width: 300px; border-radius:8px;" />
+                }
+                else
+                {
+                    <span class="text-muted">尚未上傳圖片</span>
+                }
+            </dd>
+        </div>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("返回列表", "Index")
+        </div>
+    }
+</div>

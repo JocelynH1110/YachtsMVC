@@ -1,0 +1,94 @@
+﻿@model Yachts.Models.NewsItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>新聞內容</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal row g-2 my-2 justify-content-evenly">
+        <div class="col-4  ">
+            <dt>
+                @Html.DisplayNameFor(model => model.Pinned)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Pinned)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Content)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+
+            <dt>
+                <p>附件</p>
+            </dt>
+
+            <dd>
+                @if (Model.Attachments != null && Model.Attachments.Any())
+                {
+                    <div class="card" style="max-width:600px;">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var att in Model.Attachments)
+                            {
+                                    <a class="list-group-item d-flex justify-content-between align-items-center" href="@Url.Content(att.FilePath)" download>@att.FileName</a>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">此新聞沒有附件</p>
+                }
+            </dd>
+        </div>
+
+        <div class="col-4">
+            <dd>
+                @if (!string.IsNullOrEmpty(Model.CoverPhotoPath))
+                {
+                    <img src="@Url.Content(Model.CoverPhotoPath)" alt="News photo" class="img-thumbnail shadow-sm" style="max-width: 300px; border-radius:8px;" />
+                }
+                else
+                {
+                    <span class="text-muted">尚未上傳圖片</span>
+                }
+            </dd>
+        </div>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯", "Edit", new { id = Model.NewsId }) |
+    @Html.ActionLink("返回列表", "Index")
+</p>

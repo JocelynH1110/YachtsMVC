@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 /Yachts/Uploads
+
+/Yachts/Web.*.config
+
+.env
