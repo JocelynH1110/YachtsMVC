@@ -21,6 +21,7 @@ namespace Yachts.Models
         public DbSet<NewsItem> NewsItems { get; set; }
         public DbSet<NewsAttachment> NewsAttachments { get; set; }
         public DbSet<ContactForm> ContactForms { get; set; }
+        public DbSet<Product> Products { get; set; }
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
