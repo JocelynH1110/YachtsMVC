@@ -38,11 +38,15 @@ namespace Yachts.Controllers
             {
                 dealers = dealers.Where(x => x.Region == region);
                 ViewBag.Region = region;
+                ViewBag.Count= dealers.Count();
             }
 
             var result = dealers.OrderBy(d => d.CountryCode).ToPagedList(page.Value - 1, pageSize.Value);
-
+        
+            ViewBag.CurrentPage = result.PageNumber;
+            ViewBag.LastPage = result.PageCount;
             ViewBag.Regions = _repo.ListRegions();
+
             return View(result);
         }
     }
