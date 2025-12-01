@@ -622,13 +622,14 @@ body {
 
 .pagenumber {
     float: left;
-    width: 70%;
+    width: 100%;
     margin-top: 20px;
 }
 
 .pagenumber a {
     color: #636363;
     text-decoration: none;
+    border:1px solid;
 }
 
 .pagenumber a:hover {
@@ -638,9 +639,9 @@ body {
 
 .pagenumber1 {
     float: right;
-    width: 30%;
+    width: 50%;
     text-align: right;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .pagenumber1 span, .pagenumber span {
@@ -822,4 +823,75 @@ body {
     text-align: right;
     padding-top: 20px;
     float: right;
+}
+
+
+/*pagination */
+div#pagination {
+    height: 50px;
+    margin-top: 3px;
+}
+
+    div#pagination .count {
+        float: left;
+        padding: 5px;
+    }
+
+    div#pagination .pages {
+        float: right;
+        padding: 5px;
+    }
+
+div#paginationTop .count {
+    float: left;
+    padding: 5px;
+}
+
+div#paginationTop .pages {
+    float: right;
+    padding: 5px;
+}
+
+div.pagination {
+    padding: 3px;
+    margin: 3px;
+}
+
+    div.pagination a {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #34A9D4;
+        text-decoration: none; /* no underline */
+        color: #34A9D4;
+    }
+
+        div.pagination a:hover, div.pagination a:active {
+            border: 1px solid #34A9D4;
+            color: #000;
+        }
+
+    div.pagination span.current {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #34A9D4;
+        font-weight: bold;
+        background-color: #34A9D4;
+        color: #FFF;
+    }
+
+    div.pagination span.disabled {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #EEE;
+        color: #DDD;
+    }
+
+.bold14 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.rederror {
+    color: red;
 }

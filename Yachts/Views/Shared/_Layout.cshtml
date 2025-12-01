@@ -10,7 +10,7 @@
         <![endif]-->
 
     <link href="~/Content/css/reset.css" rel="stylesheet" />
-    <link href="~/Content/css/homestyle.css" rel="stylesheet" />
+    <link href="~/Content/css/homestyle.css?v=@Guid.NewGuid()" rel="stylesheet" />
     
     @*@Styles.Render("~/Content/css")
       @Scripts.Render("~/bundles/modernizr")*@
@@ -50,11 +50,11 @@
         </div>
         <!--------------------------------換圖結束---------------------------------------------------->
         <!--------------------------------右邊內容頁開始---------------------------------------------------->
-        <form id="form1" runat="server">
+        <article id="form1" runat="server">
             <div>
                 @RenderBody()
             </div>
-        </form>
+        </article>
         <!--------------------------------右邊內容頁結束---------------------------------------------------->
         <!--------------------------------落款開始---------------------------------------------------->
         <div class="footer">

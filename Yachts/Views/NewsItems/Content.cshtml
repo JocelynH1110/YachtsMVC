@@ -1,0 +1,59 @@
+﻿@model Yachts.Models.NewsItem
+
+@{
+    ViewBag.Title = "Content";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .ck-content p,
+    .ck-content div {
+        float: none !important;
+        border: none !important;
+    }
+</style>
+
+<div class="conbg">
+    <!--------------------------------左邊選單開始---------------------------------------------------->
+    <div class="left">
+
+        <div class="left1">
+            <p><span>NEWS</span></p>
+            <ul>
+                <li><a href="~/NewsItems/Index">News & Events</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--------------------------------左邊選單結束---------------------------------------------------->
+    <!--------------------------------右邊選單開始---------------------------------------------------->
+    <div id="crumb"><a href="/">Home</a> >> <a href="~/NewsItems/Index">News </a> >> <a href="#"><span class="on1">Content</span></a></div>
+    <div class="right">
+        <div class="right1">
+            <div class="title"> <span>News & Events</span></div>
+
+            <!--------------------------------內容開始---------------------------------------------------->
+            <div class="box3">
+                <h4>@Html.DisplayFor(model => model.Title)</h4>       
+                <div class="ck-content">
+                    @Html.Raw(Model.Content)
+                </div>
+
+            <!--下載開始-->
+                <div class="ck-content downloads">
+                    <p><img src="~/Images/downloads.gif" alt="&quot;&quot;" /></p>
+                    <ul>
+                        @foreach (var item in Model.Attachments)
+                        {
+                            <li><a href="@Url.Content(item.FilePath)" download>@item.FileName</a></li>
+                        }
+                    </ul>
+                </div>
+            <!--下載結束-->
+
+            <div class="buttom001"><a href="#"><img src="~/Images/back.gif" alt="&quot;&quot;" width="55" height="28" /></a></div>
+
+            <!--------------------------------內容結束------------------------------------------------------>
+        </div>
+    </div>
+
+    <!--------------------------------右邊選單結束---------------------------------------------------->
+</div>

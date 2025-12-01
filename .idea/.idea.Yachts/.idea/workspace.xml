@@ -7,7 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="" />
+    <list default="true" id="29962308-faa0-4555-845f-77f4ac3357b4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/dataSources/e832fcfe-c0f9-4869-bf3d-4f61611d9dc1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/dataSources/e832fcfe-c0f9-4869-bf3d-4f61611d9dc1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Yachts/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Controllers/ContactController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Controllers/ContactController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Global.asax.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Global.asax.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Views/Contact/Contact.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Views/Contact/Contact.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Web.Debug.config" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Web.Debug.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/Yachts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/Yachts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yachts/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Yachts/packages.config" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +46,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54286b96e8a646058a7700349888254d6200/be/1a6dc3e8/PagingExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -48,37 +62,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.Yachts - IIS Express.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/dealers/page",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.code.cleanup.on.save": "true",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.Yachts - IIS Express.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/contact/page&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;RiderUnitTestingPageId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Yachts - IIS Express" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../../../Program Files (x86)/IIS Express/iisexpress.exe" />
       <option name="PROGRAM_PARAMETERS" value="/config:$PROJECT_DIR$/.idea/config/applicationhost.config /site:Yachts /apppool:Clr4IntegratedAppPool" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../Program Files (x86)/IIS Express" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="AUTO_ATTACH_CHILDREN" value="0" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Yachts/Yachts.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -106,6 +120,10 @@
       <workItem from="1761187949304" duration="1300000" />
       <workItem from="1762394914151" duration="10072000" />
       <workItem from="1762959590735" duration="2240000" />
+      <workItem from="1763302437586" duration="2177000" />
+      <workItem from="1764410437721" duration="1895000" />
+      <workItem from="1764412638092" duration="771000" />
+      <workItem from="1764413482501" duration="1589000" />
     </task>
     <task id="LOCAL-00001" summary="製造麻煩">
       <option name="closed" value="true" />
@@ -115,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762961454557</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add NewsItem model">
+      <option name="closed" value="true" />
+      <created>1763304291786</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763304291786</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,7 +163,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="製造麻煩" />
-    <option name="LAST_COMMIT_MESSAGE" value="製造麻煩" />
+    <MESSAGE value="Add NewsItem model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add NewsItem model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -154,6 +181,19 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Yachts/Controllers/ContactController.cs</url>
+          <line>50</line>
+          <properties documentPath="C:\Users\Jocelyn\source\repos\Yachts\Yachts\Controllers\ContactController.cs" containingFunctionPresentation="Method 'SendMailToAdmin'">
+            <startOffsets>
+              <option value="1660" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1851" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
