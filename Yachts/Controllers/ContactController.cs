@@ -31,21 +31,40 @@ namespace Yachts.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitContact(ContactForm form)
         {
-            Debug.WriteLine("=== FORM HAS ARRIVED ===");
+            ViewBag.CountryList = GetCountryList();
+
+            var ip = Request.UserHostAddress;
+
+            if (IsFrequentlySubmit(ip))
+            {
+                return Content("你送出太頻繁了，請稍候再試");
+            }
+
             if (ModelState.IsValid)
             {
                 _db.ContactForms.Add(form);
                 _db.SaveChanges();
 
                 SendMailToAdmin(form);
-
-                return Content("YES I AM HERE！");
+                TempData["Message"] = "Successfully sent";    // 這樣才可跨越一次可以跨一次 Redirec至Contact()
+                TempData["Status"] = "success";
+                return RedirectToAction("Contact");
             }
+            TempData["Message"] = "Sending failed";
+            TempData["Status"] = "error";
 
-            return View("Contact", form);
+            return View("Contact", form);   // 送出表單失敗會保留當下填寫的資料
         }
 
+        // 送出次數限制（Rate Limiting）
+        public static Dictionary<string, DateTime> submitRecord = new Dictionary<string, DateTime>();
+        private bool IsFrequentlySubmit(string ip)
+        {
+            if (!submitRecord.ContainsKey(ip)) return false;
+            return (DateTime.Now - submitRecord[ip]).TotalSeconds < 30;
+        }
 
+        // 管理者收到表單
         public void SendMailToAdmin(ContactForm form)
         {
             var smtp = new SmtpClient("smtp.gmail.com", 587)

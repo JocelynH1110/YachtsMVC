@@ -24,7 +24,7 @@
 
             <!--------------------------------內容開始---------------------------------------------------->
             <!--表單-->
-            @using (Html.BeginForm("SubmitContact", "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("SubmitContact", "Contact", FormMethod.Post, new { enctype = "multipart/form-data", novalidate = true }))
             {
                 @Html.AntiForgeryToken()
                 <div class="from01">
@@ -35,7 +35,8 @@
                         <tr>
                             <td class="from01td01">Name :</td>
                             <td>
-                                <span>*</span>@Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "required", autocomplete = "name" })@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                <span>*</span>@Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </td>
 
                         </tr>
@@ -87,6 +88,19 @@
                                 <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
                                     <img src="~/Images/buttom03.gif" alt="submit" width="59" height="25" />
                                 </button>
+
+                                @{
+                                    var status = TempData["Status"] as string;
+                                    var message = TempData["Message"] as string;
+                                    var color = (status == "success") ? "green" : "red";
+
+                                    if (message != null)
+                                    {
+                                        <div style="color:@color; font-weight:bolder">
+                                            @TempData["Message"]
+                                        </div>
+                                    }
+                                }
                             </td>
                         </tr>
 
