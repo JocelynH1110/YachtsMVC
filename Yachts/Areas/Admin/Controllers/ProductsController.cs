@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcPaging;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,32 @@ namespace Yachts.Areas.Admin.Controllers
         private DBModelContext db = new DBModelContext();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? pageSize, string searchByName)
         {
-            return View(db.Products.ToList());
+            // 目前頁數
+            if (!page.HasValue)
+            {
+                page = 1;
+            }
+
+            // 一頁幾筆
+            if (!pageSize.HasValue)
+            {
+                pageSize = 10;
+            }
+            ViewBag.PageSize = pageSize.Value;
+
+            var products = db.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchByName))
+            {
+                products = products.Where(n => n.Name.Contains(searchByName));
+                ViewBag.SearchByName = searchByName;
+            }
+
+            var result = products.OrderByDescending(n => n.CreatedAt).ThenByDescending(n => n.UpdatedAt).ToPagedList(page.Value - 1, pageSize.Value);
+
+            return View(result);
         }
 
         // GET: Admin/Products/Details/5
