@@ -364,6 +364,10 @@
     <Compile Include="Migrations\202512020539397_ChangeDimensionOfProductAndCreateProductSize.Designer.cs">
       <DependentUpon>202512020539397_ChangeDimensionOfProductAndCreateProductSize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512020617436_ChangeDimensionNameToProductSize.cs" />
+    <Compile Include="Migrations\202512020617436_ChangeDimensionNameToProductSize.Designer.cs">
+      <DependentUpon>202512020617436_ChangeDimensionNameToProductSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\DBModelContext.cs" />
@@ -518,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512020539397_ChangeDimensionOfProductAndCreateProductSize.resx">
       <DependentUpon>202512020539397_ChangeDimensionOfProductAndCreateProductSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512020617436_ChangeDimensionNameToProductSize.resx">
+      <DependentUpon>202512020617436_ChangeDimensionNameToProductSize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

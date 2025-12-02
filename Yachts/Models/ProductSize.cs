@@ -11,10 +11,16 @@ namespace Yachts.Models
         [Key]
         public int Id { get; set; }
 
-        public int ProductId { get; set; }
+        [Display(Name = "尺寸名稱")]
+        [StringLength(30)]
+        public string DimensionName { get; set; }
 
+        [Display(Name = "尺寸大小")]
+        [StringLength(30)]
         public string DimensionValue { get; set; }
-
+        
+        // FK
+        public int ProductId { get; set; }
         public virtual Product Product { get; set; }
     }
 }
