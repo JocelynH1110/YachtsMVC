@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
@@ -70,7 +71,7 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Dimensions,Structual,Specification,CreatedAt,UpdatedAt")] Product product)
+        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Sizes,Structual,Specification,CreatedAt,UpdatedAt")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -89,11 +90,19 @@ namespace Yachts.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products
+                    .Include("Sizes")
+                    .FirstOrDefault(p => p.Id == id);
+
             if (product == null)
             {
                 return HttpNotFound();
             }
+
+            // 若第一次進編輯頁面，但 Sizes = null，就初始化避免 null 錯誤
+            if (product.Sizes == null)
+                product.Sizes = new List<ProductSize>();
+
             return View(product);
         }
 
@@ -102,11 +111,61 @@ namespace Yachts.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IsLatest,Name,Dimensions,Structual,Specification,CreatedAt,UpdatedAt")] Product product)
+        public ActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                if (product.Sizes == null)
+                    product.Sizes = new List<ProductSize>();  // 防 Null
+
+                // ========== 第一步：先過濾掉空的 Sizes ==========
+                if (product.Sizes != null)
+                {
+                    product.Sizes = product.Sizes
+                        .Where(s => !string.IsNullOrWhiteSpace(s.DimensionName)
+                                 && !string.IsNullOrWhiteSpace(s.DimensionValue))
+                        .ToList();
+                }
+
+                var existing = db.Products.Include(p => p.Sizes).FirstOrDefault(p => p.Id == product.Id);
+
+                if (existing == null)
+                    return HttpNotFound();
+
+                // 更新產品資料
+                existing.Name = product.Name;
+                existing.IsLatest = product.IsLatest;
+                existing.Structual = product.Structual;
+                existing.Specification = product.Specification;
+                existing.UpdatedAt = DateTime.Now;
+
+                // ========== 第二步：處理尺寸變更 ==========
+                // 刪除被使用者移除的尺寸（包括空欄位）
+                var postedIds = product.Sizes.Select(s => s.Id).ToList();
+                var toDelete = existing.Sizes
+                    .Where(s => !postedIds.Contains(s.Id))
+                    .ToList();
+
+                foreach (var del in toDelete)
+                    db.ProductSizes.Remove(del);
+
+                // 更新 + 新增尺寸
+                foreach (var size in product.Sizes)
+                {
+                    if (size.Id > 0)
+                    {
+                        // 更新舊尺寸
+                        var oldSize = existing.Sizes.First(s => s.Id == size.Id);
+                        oldSize.DimensionName = size.DimensionName;
+                        oldSize.DimensionValue = size.DimensionValue;
+                    }
+                    else
+                    {
+                        // 新增尺寸
+                        size.ProductId = existing.Id;
+                        db.ProductSizes.Add(size);
+                    }
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

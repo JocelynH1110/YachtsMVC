@@ -5,14 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>編輯遊艇</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -36,10 +35,71 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Dimensions, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Sizes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Dimensions, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Dimensions, "", new { @class = "text-danger" })
+                <!--尺寸輸入框-->
+                <div id="dimension-container">
+                    <!-- 第一筆輸入框 -->
+                    @if (Model.Sizes != null && Model.Sizes.Count > 0)
+                    {
+                        int index = 0;
+                        foreach (var size in Model.Sizes)
+                        {
+                            <div class="dimension-row" data-index="@index">
+                                <div class="input-group" style="margin-bottom:10px">
+
+                                    <!-- Hidden Id，用來對比更新 -->
+                                    <input type="hidden" name="Sizes[@index].Id" value="@size.Id" />
+
+                                    <input type="text"
+                                           name="Sizes[@index].DimensionName"
+                                           class="form-control"
+                                           value="@size.DimensionName"
+                                           placeholder="尺寸名稱（例：長度）" />
+
+                                    <input type="text"
+                                           name="Sizes[@index].DimensionValue"
+                                           class="form-control"
+                                           value="@size.DimensionValue"
+                                           placeholder="尺寸值（例：200cm）" />
+
+                                    <button type="button" class="btn btn-danger remove-dimension">刪除</button>
+
+                                </div>
+                            </div>
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        <!-- 若第一次進入不含任何尺寸，給一筆空的 -->
+                        <div class="dimension-row" data-index="0">
+                            <div class="input-group" style="margin-bottom:10px">
+
+                                <input type="hidden" name="Sizes[0].Id" value="0" />
+
+                                <input type="text"
+                                       name="Sizes[0].DimensionName"
+                                       class="form-control"
+                                       placeholder="尺寸名稱（例：長度）" />
+
+                                <input type="text"
+                                       name="Sizes[0].DimensionValue"
+                                       class="form-control"
+                                       placeholder="尺寸值（例：200cm）" />
+
+                                <button type="button" class="btn btn-danger remove-dimension">刪除</button>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- 錯誤訊息 -->
+                @Html.ValidationMessageFor(model => model.Sizes, "", new { @class = "text-danger" })
+
+                <!-- 新增欄位按鈕 -->
+                <button type="button" id="btn-add-dimension" class="btn-secondary">新增尺寸欄位</button>
             </div>
         </div>
 
@@ -77,12 +137,68 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="儲存" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("返回列表", "Index")
 </div>
+
+<script>
+    document.getElementById("btn-add-dimension").addEventListener("click", function () {
+        let container = $("#dimension-container");
+        let index = container.children(".dimension-row").length;
+
+        let html = `
+        <div class="dimension-row" data-index="${index}">
+            <div class="input-group" style="margin-bottom:10px">
+
+                <input type="hidden" name="Sizes[${index}].Id" value="0" />
+
+                <input type="text"
+                       name="Sizes[${index}].DimensionName"
+                       class="form-control"
+                       placeholder="尺寸名稱（例：長度）" />
+
+                <input type="text"
+                       name="Sizes[${index}].DimensionValue"
+                       class="form-control"
+                       placeholder="尺寸值（例：200cm）" />
+
+                <button type="button" class="btn btn-danger remove-dimension">刪除</button>
+
+            </div>
+        </div>
+    `;
+        container.append(html);
+    });
+
+    // ========== 刪除尺寸欄位（使用事件委派） ==========
+    // 方案1：使用原生JavaScript的事件委派
+    document.getElementById("dimension-container").addEventListener("click", function (e) {
+        if (e.target.classList.contains("remove-dimension")) {
+            e.target.closest(".dimension-row").remove();
+            resetIndexes();
+        }
+    });
+
+    // ========== 重新設定索引 ==========
+    function resetIndexes() {
+        let container = document.getElementById("dimension-container");
+        let rows = container.querySelectorAll(".dimension-row");
+
+        rows.forEach((row, i) => {
+            row.setAttribute("data-index", i);
+            row.querySelectorAll("input, select").forEach(input => {
+                let oldName = input.getAttribute("name");
+                if (oldName) {
+                    let newName = oldName.replace(/Sizes\[\d+\]/, `Sizes[${i}]`);
+                    input.setAttribute("name", newName);
+                }
+            });
+        });
+    }
+</script>

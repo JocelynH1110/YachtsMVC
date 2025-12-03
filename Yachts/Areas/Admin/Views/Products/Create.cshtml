@@ -5,18 +5,17 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>新增遊艇</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.IsLatest, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForRequired(model => model.IsLatest, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.IsLatest)
@@ -26,36 +25,51 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForRequired(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <h3>尺寸</h3>
         <div class="form-group">
-            @Html.LabelFor(model => model.Sizes, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForRequired(model => model.Sizes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <!--尺寸輸入框-->
-                <div id="size-container">
-                    <!-- 第一個輸入框 -->
-                    <div class="size-group">
-                        <input type="text" name="Sizes[0].DimensionValue" class="form-control" placeholder="輸入尺寸" />
+                <div id="dimension-container">
+                    <!-- 第一筆輸入框 -->
+                    <div class="dimension-row" data-index="0">
+                        <div class="input-group" style="margin-bottom:10px">
+
+                            <input type="text"
+                                   name="Sizes[0].DimensionName"
+                                   class="form-control"
+                                   placeholder="尺寸名稱（例：長度）" />
+
+                            <input type="text"
+                                   name="Sizes[0].DimensionValue"
+                                   class="form-control"
+                                   placeholder="尺寸值（例：200cm）" />
+
+                            <button type="button" class="btn btn-danger remove-dimension">
+                                刪除
+                            </button>
+
+                        </div>
                     </div>
+
                 </div>
 
                 <!-- 錯誤訊息 -->
                 @Html.ValidationMessageFor(model => model.Sizes, "", new { @class = "text-danger" })
 
                 <!-- 新增欄位按鈕 -->
-                <button type="button" id="add-size" class="btn-secondary">新增尺寸欄位</button>
+                <button type="button" id="add-dimension" class="btn-secondary">新增尺寸欄位</button>
             </div>
-            
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Structual, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForRequired(model => model.Structual, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Structual, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Structual, "", new { @class = "text-danger" })
@@ -63,14 +77,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelForRequired(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
@@ -84,36 +98,56 @@
                 @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="新增" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("返回列表", "Index")
 </div>
 
 <script>
-    let index = 1; // 已有 Sizes[0]
+    let index = 1; // 已有 index=0 的一筆
 
-    document.getElementById("add-size").addEventListener("click", function () {
+    document.getElementById("add-dimension").addEventListener("click", function () {
 
-        const container = document.getElementById("size-container");
+        let html = `
+            <div class="dimension-row" data-index="${index}">
+                <div class="input-group" style="margin-bottom:10px">
 
-        const newItem = document.createElement("div");
-        newItem.classList.add("size-group");
+                    <input type="text"
+                           name="Dimensions[${index}].DimensionName"
+                           class="form-control"
+                           placeholder="尺寸名稱（例：長度）" />
 
-        newItem.innerHTML = `
-            <input type="text" name="Sizes[${index}].DimensionValue" class="form-control" placeholder="輸入尺寸">
+                    <input type="text"
+                           name="Dimensions[${index}].DimensionValue"
+                           class="form-control"
+                           placeholder="尺寸值（例：200cm）" />
+
+                    <button type="button" class="btn btn-danger remove-dimension">
+                        刪除
+                    </button>
+                </div>
+            </div>
         `;
 
-        container.appendChild(newItem);
+        document.getElementById("dimension-container")
+            .insertAdjacentHTML("beforeend", html);
 
         index++;
+    });
+
+    // 事件代理：處理所有刪除按鈕
+    document.getElementById("dimension-container").addEventListener("click", function (e) {
+        if (e.target.classList.contains("remove-dimension")) {
+            e.target.closest(".dimension-row").remove();
+        }
     });
 </script>
