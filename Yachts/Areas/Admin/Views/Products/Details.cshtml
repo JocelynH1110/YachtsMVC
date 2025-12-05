@@ -5,10 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>遊艇詳細資料</h2>
 
 <div>
-    <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -32,7 +31,22 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Sizes)
+            @if (Model.Sizes != null && Model.Sizes.Any())  // .Any() 檢查「集合裡是否有任何一筆資料」
+            {
+                <table style="border:1px solid gray !important;">
+                    @foreach (var item in Model.Sizes)
+                    {
+                        <tr>
+                            <th style="width: 130px; border: 1px solid gray !important">@item.DimensionName</th>
+                            <td style="width: 130px; border: 1px solid gray !important">@item.DimensionValue</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">無尺寸資料</p>
+            }
         </dd>
 
         <dt>
@@ -70,6 +84,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("編輯", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("返回列表", "Index")
 </p>

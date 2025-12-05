@@ -10,8 +10,8 @@
 <h2>遊艇列表</h2>
 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
-    <label>快速搜尋_標題</label>
-    <input type="search" name="searchByTitle" value="@ViewBag.SearchByName" />
+    <label>快速搜尋_遊艇名稱:</label>
+    <input type="search" name="searchByName" value="@ViewBag.SearchByName" />
 
     <laber>目前顯示幾筆資料:</laber>
     <input name="pageSize" value="@ViewBag.pageSize" />

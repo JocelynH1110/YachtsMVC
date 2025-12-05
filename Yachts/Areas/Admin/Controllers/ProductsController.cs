@@ -116,7 +116,7 @@ namespace Yachts.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (product.Sizes == null)
-                    product.Sizes = new List<ProductSize>();  // 防 Null
+                    product.Sizes = new List<ProductSize>();  // 防 Null 因為我的尺寸可以為空
 
                 // ========== 第一步：先過濾掉空的 Sizes ==========
                 if (product.Sizes != null)
@@ -192,7 +192,9 @@ namespace Yachts.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
+            // 把附表的資料載入
+            Product product = db.Products.Include(s=>s.Sizes).FirstOrDefault(s=>s.Id==id);
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
