@@ -7,7 +7,7 @@
 
 <h2>新增遊艇</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -79,26 +79,32 @@
         <div class="form-group">
             @Html.LabelForRequired(model => model.Specification, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Specification, new { @id = "Specification", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
             </div>
+            @{ 
+                ViewBag.EditorId = "Specification";
+                ViewBag.UploadUrl = Url.Action("UploadImage", "Products");
+            }
+            @*@Html.Partial("_CkEditor")*@
+
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -151,3 +157,13 @@
         }
     });
 </script>
+<!-- CKEditor -->
+
+@*<script>
+    CKEDITOR.replace('Specification', {
+       extraPlugins: 'uploadimage,image2,clipboard',
+       height: 400,
+       filebrowserUploadUrl: '@Url.Action("UploadImage", "Products")',
+       filebrowserUploadMethod: 'xhr'
+   });
+</script>*@

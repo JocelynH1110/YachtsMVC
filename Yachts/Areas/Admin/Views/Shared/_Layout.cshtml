@@ -44,7 +44,7 @@
                     @*<span class="app-brand-logo demo">
                             logo連結
                         </span>*@
-                    <a href="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Yachts</a>
+                    <a href="/" class="app-brand-text demo sidenav-text font-weight-semibold ml-2">後台管理系統</a>
                     <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                         <i class="ion ion-md-menu align-middle"></i>
                     </a>
@@ -69,7 +69,7 @@
                     <li class="sidenav-divider mb-1"></li>
                     <li class="sidenav-header small font-weight-semibold">總覽</li>
                     <li class="sidenav-item">
-                        <a href="AlbumList.aspx" class="sidenav-link">
+                        <a href="/Admin/Products/Index" class="sidenav-link">
                             <i class="sidenav-icon feather icon-image"></i>
                             <div>遊艇列表</div>
                         </a>
@@ -145,19 +145,14 @@
 
                     <!-- Pages -->
                     <li class="sidenav-divider mb-1"></li>
-                    <li class="sidenav-header small font-weight-semibold">Pages</li>
+                    <li class="sidenav-header small font-weight-semibold">其它</li>
                     <li class="sidenav-item">
                         <a href="~/Areas/Admin/Views/Login.cshtml" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-lock"></i>
-                            <div>Login</div>
+                            <i class="sidenav-icon feather icon-log-out"></i>
+                            <div>登出後台</div>
                         </a>
                     </li>
-                    <li class="sidenav-item">
-                        <a href="pages_authentication_register-v1.html" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-user"></i>
-                            <div>Signup</div>
-                        </a>
-                    </li>
+              
                 </ul>
             </div>
             <!-- [ Layout sidenav ] End -->
@@ -364,11 +359,6 @@
                             <div class="pt-3">
                                 <span class="footer-text font-weight-semibold">&copy; <a href="https://srthemesvilla.com" class="footer-link" target="_blank">Tayana</a></span>
                             </div>
-                            <div>
-                                <a href="javascript:" class="footer-link pt-3">About Us</a>
-                                <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
-                                <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
-                            </div>
                         </div>
                     </nav>
                     <!-- [ Layout footer ] End -->
@@ -407,10 +397,10 @@
     <!-- CKEditor -->
     <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
     <script>
-   CKEDITOR.replace('Content', {
+   CKEDITOR.replace('@ViewBag.EditorId', {
        extraPlugins: 'uploadimage,image2,clipboard',
        height: 400,
-       filebrowserUploadUrl: '@Url.Action("UploadImage", "NewsItems")',
+       filebrowserUploadUrl: '@ViewBag.UploadUrl',
        filebrowserUploadMethod: 'xhr'
    });
     </script>
