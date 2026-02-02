@@ -77,6 +77,19 @@ body {
     text-decoration: none;
 }
 
+.menuli01,
+.menuli02,
+.menuli03,
+.menuli04,
+.menuli05 {
+    position: relative;
+
+    a {
+          position: absolute;
+          inset: 0;
+      }
+}
+
 .menuli01 {
     background-image: url(/Images/menu1_03.gif);
     width: 80px;
@@ -150,7 +163,7 @@ body {
     right: 27px;
 }
 
-.bannermasks {
+/*.bannermasks {
     height: 371px;
     width: 967px;
     position: absolute;
@@ -158,9 +171,9 @@ body {
     top: 113px;
     z-index: 1;
     float: right;
-}
+}*/
 
-.bannerimg {
+/*.bannerimg {
     float: left;
     position: absolute;
     left: 43px;
@@ -169,7 +182,7 @@ body {
     width: 902px;
     height: 70px;
     overflow: hidden;
-}
+}*/
 
 .bannerimg li {
     float: right;
@@ -894,4 +907,11 @@ div.pagination {
 
 .rederror {
     color: red;
+}
+
+
+#logol {
+    position: absolute;
+    top: 23px;
+    left: 0px;
 }

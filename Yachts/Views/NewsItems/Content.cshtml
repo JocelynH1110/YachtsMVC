@@ -12,10 +12,21 @@
     }
 </style>
 
-<div class="conbg">
-    <!--------------------------------左邊選單開始---------------------------------------------------->
-    <div class="left">
+<!--遮罩-->
+<div class="bannermasks"><img src="~/Images/banner02_masks.png" alt="&quot;&quot;" /></div>
+<!--遮罩結束-->
 
+<!--換圖開始-->
+<div class="banner">
+    <ul>
+        <li><img src="~/Images/newbanner.jpg" alt="Tayana Yachts" /></li>
+    </ul>
+
+</div>
+<!--換圖結束-->
+<div class="conbg">
+    <!--左邊選單開始-->
+    <div class="left">
         <div class="left1">
             <p><span>NEWS</span></p>
             <ul>
@@ -23,14 +34,15 @@
             </ul>
         </div>
     </div>
-    <!--------------------------------左邊選單結束---------------------------------------------------->
-    <!--------------------------------右邊選單開始---------------------------------------------------->
+    <!--左邊選單結束-->
+
+    <!--右邊選單開始--->
     <div id="crumb"><a href="/">Home</a> >> <a href="~/NewsItems/Index">News </a> >> <a href="#"><span class="on1">Content</span></a></div>
     <div class="right">
         <div class="right1">
             <div class="title"> <span>News & Events</span></div>
 
-            <!--------------------------------內容開始---------------------------------------------------->
+            <!--內容開始-->
             <div class="box3">
                 <h4>@Html.DisplayFor(model => model.Title)</h4>       
                 <div class="ck-content">
@@ -50,10 +62,10 @@
             <!--下載結束-->
 
             <div class="buttom001"><a href="#"><img src="~/Images/back.gif" alt="&quot;&quot;" width="55" height="28" /></a></div>
+            <!--內容結束-->
 
-            <!--------------------------------內容結束------------------------------------------------------>
         </div>
     </div>
-
-    <!--------------------------------右邊選單結束---------------------------------------------------->
+    <!--右邊選單結束-->
+</div>
 </div>

@@ -10,56 +10,55 @@
         <![endif]-->
 
     <link href="~/Content/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@Guid.NewGuid()" rel="stylesheet" />
     <link href="~/Content/css/homestyle.css?v=@Guid.NewGuid()" rel="stylesheet" />
-    
-    @*@Styles.Render("~/Content/css")
-      @Scripts.Render("~/bundles/modernizr")*@
 
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
 </head>
+
 <body>
     <div class="contain">
         <div class="sub">
             <p><a href="/">Home</a></p>
         </div>
 
-        <!--------------------------------選單開始---------------------------------------------------->
+        <!--選單開始-->
+        <div id="logol">
+            <a href="/">
+                <img src="https://web.archive.org/web/20180112154512im_/http://www.tayanaworld.com/images/logo001.gif" alt="Tayana" />
+            </a>
+        </div>
         <div class="menu">
             <ul>
-                <li class="menuli01"><a href="Yachts.cshtml">Yachts</a></li>
-                <li class="menuli02"><a href="News.cshtml">NEWS</a></li>
-                <li class="menuli03"><a href="#">COMPANY</a></li>
-                <li class="menuli04"><a href="Dealers.cshtml">DEALERS</a></li>
-                <li class="menuli05"><a href="Contact.cshtml">CONTACT</a></li>
+                <li class="menuli01"><a href="@Url.Action("Index","Home")">Yachts</a></li>
+                <li class="menuli02"><a href="@Url.Action("Index","NewsItems")">NEWS</a></li>
+                <li class="menuli03"><a href="@Url.Action("AboutUs","Company")">COMPANY</a></li>
+                <li class="menuli04"><a href="@Url.Action("Index","Dealers")">DEALERS</a></li>
+                <li class="menuli05"><a href="@Url.Action("Contact","Contact")">CONTACT</a></li>
             </ul>
         </div>
-        <!--------------------------------選單開始結束---------------------------------------------------->
-        <!--遮罩-->
-        <div class="bannermasks">
-            <img src="~/Images/contact.jpg" alt="&quot;&quot;" width="967" height="371" />
-        </div>
-        <!--遮罩結束-->
-        <!--<div id="buttom01"><a href="#"><img src="images/buttom01.gif" alt="next" /></a></div>-->
-        <!--<div id="buttom02"> <a href="#"><img src="images/buttom02.gif" alt="next" /></a></div>-->
-
-        <!--------------------------------右邊內容頁開始---------------------------------------------------->
-        <article id="form1" runat="server">
-            <div>
-                @RenderBody()
-            </div>
+        <!--選單開始結束-->
+  
+        <!--內容頁開始-->
+        <article id="form1">
+           @RenderBody()
         </article>
-        <!--------------------------------右邊內容頁結束---------------------------------------------------->
-        <!--------------------------------落款開始---------------------------------------------------->
+        <!--內容頁結束-->
+
+        <!--落款開始-->
         <div class="footer">
-            <p class="footerp01">© 1973-2011 Tayana Yachts, Inc. All Rights Reserved</p>
 
-            <!--------------------------------落款結束---------------------------------------------------->
-
+            <div class="footerp00">
+                <a href="#"><img src="~/Images/tog.jpg" alt="&quot;&quot;" /></a>
+                <p class="footerp001">© 1973-2011 Tayana Yachts, Inc. All Rights Reserved</p>
+            </div>
             <div class="footer01">
                 <span>No. 60, Hai Chien Road, Chung Men Li, Lin Yuan District, Kaohsiung City, Taiwan, R.O.C.</span><br />
-                <span>TEL：+886(7)641-2721</span>
-                <span>FAX：+886(7)642-3193<a href="mailto:tayangco@ms15.hinet.net">E-mail：tayangco@ms15.hinet.net</a>.</span>
+                <span>TEL：+886(7)641-2721</span> <span>FAX：+886(7)642-3193</span><span><a href="mailto:tayangco@ms15.hinet.net">E-mail：tayangco@ms15.hinet.net</a>.</span>
             </div>
         </div>
+        <!--落款結束-->
     </div>
 
     <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
@@ -70,9 +69,47 @@
                 fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
             });
         });
-    </script>
 
-      
-  
+        $(function () {
+            // 先取得 #abgne-block-20110111 , 必要參數及輪播間隔
+            var $block = $('#abgne-block-20110111'),
+                timrt, speed = 4000;
+
+            // 幫 #abgne-block-20110111 .title ul li 加上 hover() 事件
+            var $li = $('.title ul li', $block).hover(function () {
+                // 當滑鼠移上時加上 .over 樣式
+                $(this).addClass('over').siblings('.over').removeClass('over');
+            }, function () {
+                // 當滑鼠移出時移除 .over 樣式
+                $(this).removeClass('over');
+            }).click(function () {
+                // 當滑鼠點擊時, 顯示相對應的 div.info
+                // 並加上 .on 樣式
+                var $this = $(this);
+                $this.add($('.bd li.info', $block).eq($this.index())).addClass('on').siblings('.on').removeClass('on');
+            });
+
+            // 幫 $block 加上 hover() 事件
+            $block.hover(function () {
+                // 當滑鼠移上時停止計時器
+                clearTimeout(timer);
+            }, function () {
+                // 當滑鼠移出時啟動計時器
+                timer = setTimeout(move, speed);
+            });
+
+            // 控制輪播
+            function move() {
+                var _index = $('.title ul li.on', $block).index();
+                _index = (_index + 1) % $li.length;
+                $li.eq(_index).click();
+
+                timer = setTimeout(move, speed);
+            }
+
+            // 啟動計時器
+            timer = setTimeout(move, speed);
+        });
+    </script>
 </body>
 </html>
