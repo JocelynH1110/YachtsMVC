@@ -18,7 +18,7 @@ namespace Yachts.Repositories
         // 取得全部
         public IQueryable<Product> GetProducts(string productName = null)
         {
-            var query = _db.Products.AsQueryable();
+            var query = _db.Products.Include("Sizes").AsQueryable();
 
             // productName 有值就做篩選;沒值 = null 就傳回全部資料
             if (!string.IsNullOrEmpty(productName))

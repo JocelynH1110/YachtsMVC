@@ -459,6 +459,7 @@
     <Content Include="Views\NewsItems\Content.cshtml" />
     <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Yachts\Index.cshtml" />
+    <Content Include="Views\Yachts\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
