@@ -27,5 +27,28 @@ namespace Yachts.Controllers
            
             return View(result);
         }
+
+        public ActionResult DeskPlan(int? productId)
+        {
+
+            return View();
+        }
+
+        public ActionResult Specification(int? id) 
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+            Product product = _repo.GetProductByProductId(id.Value);
+         
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Product = product;
+            return View(product);
+        }
     }
 }

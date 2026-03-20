@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Yachts.Models;
 
 namespace Yachts.Repositories
@@ -27,6 +28,13 @@ namespace Yachts.Repositories
             }
             return query.OrderBy(p=>p.Name);
         }
+
+        // 取得單一產品
+        public Product GetProductByProductId(int id)
+        {
+            return _db.Products.Find(id);
+        }
+
         public IEnumerable<string> ListYachts()
         {
             return _db.Products.Where(p=>!string.IsNullOrEmpty(p.Name)).Select(p=>p.Name).Distinct().ToList();

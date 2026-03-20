@@ -30,7 +30,7 @@
 
     <ul>
         <li> <a class="on" href="#"><p class="bannerimg_p"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></p></a></li>
-        <li> <p class="bannerimg_p"><a href="#"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></p></li>
+        <li> <p class="bannerimg_p"><a href="#"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></a></p></li>
         <li> <a href="#"><p class="bannerimg_p"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></p></a></li>
         <li> <a href="#"><p class="bannerimg_p"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></p></a></li>
         <li> <a href="#"><p class="bannerimg_p"><img src="~/Images/pit003.jpg" alt="&quot;&quot;" /></p></a></li>
@@ -82,12 +82,15 @@
             <!--內容開始-->
             <!--次選單-->
             <div class="menu_y">
-                <ul>
-                    <li class="menu_y00">YACHTS</li>
-                    <li><a class="menu_yli01" href="#">Interior</a></li>
-                    <li><a class="menu_yli02" href="#">Layout & deck plan</a>n</li>
-                    <li><a class="menu_yli03" href="#">Specification</a></li>
-                </ul>
+                @foreach (var item in Model)
+                {
+                    <ul>
+                        <li class="menu_y00">YACHTS</li>
+                        <li><a class="menu_yli01" href="#">Interior</a></li>
+                        <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts", new {id=item.Id})">Layout & deck plan</a>n</li>
+                        <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts", new {id=item.Id})">Specification</a></li>
+                    </ul>
+                }
             </div>
             <!--次選單-->
 
