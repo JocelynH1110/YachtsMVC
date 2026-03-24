@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Yachts.Models;
 using Yachts.Repositories;
+using Yachts.ViewModels.Yacht;
 
 namespace Yachts.Controllers
 {
@@ -18,14 +19,43 @@ namespace Yachts.Controllers
         }
 
         // GET: Yachts
-        public ActionResult Index(string product)
+        public ActionResult Index(int? id)
         {
-            var result = _repo.GetProducts(product);
+            var yachts=_repo.GetProducts();
 
-            ViewBag.Product = product;
-            ViewBag.Products = _repo.ListYachts();
-           
-            return View(result);
+            if(yachts == null || !yachts.Any())
+            {
+                return HttpNotFound();
+            }
+
+            var selected=id.HasValue?_repo.GetProductByProductId(id.Value):yachts.FirstOrDefault();
+
+            if (selected == null) { 
+            return HttpNotFound();
+            }
+
+            var vm = new YachtPageViewModel
+            {
+                Yachts = yachts.Select(y => new YachtListViewModel
+                {
+                    Id = y.Id,
+                    Name = y.Name
+                }).ToList(),
+
+                SelectedYacht = new YachtDetailViewModel
+                {
+                    Name = selected.Name,
+                    Specification = selected.Specification,
+                    Structual = selected.Structual,
+
+                    Sizes = selected.Sizes.Select(s => new YachtSizeViewModel
+                    {
+                        DimensionName = s.DimensionName,
+                        DimensionValue = s.DimensionValue,
+                    }).ToList()
+                }
+            };
+            return View(vm);
         }
 
         public ActionResult DeskPlan(int? productId)

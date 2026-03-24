@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Yachts.Models.Product>
+﻿@*@model IEnumerable<Yachts.Models.Product>*@
+@model Yachts.ViewModels.Yacht.YachtPageViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -65,42 +66,52 @@
         <div class="left1">
             <p><span>Yachts</span></p>
             <ul>
-                @foreach (var product in ViewBag.Products)
+                @*@foreach (var product in ViewBag.Products)
+                    {
+                        <li><a href="/Yachts?product=@product">@product</a></li>
+                    }*@
+                @foreach (var yacht in Model.Yachts)
                 {
-                    <li><a href="/Yachts?product=@product">@product</a></li>
+                    <li>
+                        <a href="@Url.Action("Index", "Yachts", new {id=yacht.Id})">
+                            @yacht.Name
+                        </a>
+                    </li>
                 }
             </ul>
         </div>
     </div>
     <!--左邊選單結束-->
     <!--右邊選單開始-->
-    <div id="crumb"><a href="#">Home</a> >> <a href="#">Yachts</a> >> <a href="/Yachts?product=@ViewBag.Product"><span class="on1">@ViewBag.Product</span></a></div>
+    <div id="crumb"><a href="#">Home</a> >> <a href="#">Yachts</a> >> <a href="/Yachts?product=@Model.SelectedYacht.Name"><span class="on1">@Model.SelectedYacht.Name</span></a></div>
     <div class="right">
         <div class="right1">
-            <div class="title"> <span>@ViewBag.Product</span></div>
+            <div class="title"> <span>@Model.SelectedYacht.Name</span></div>
 
             <!--內容開始-->
             <!--次選單-->
             <div class="menu_y">
-                @foreach (var item in Model)
-                {
-                    <ul>
-                        <li class="menu_y00">YACHTS</li>
-                        <li><a class="menu_yli01" href="#">Interior</a></li>
-                        <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts", new {id=item.Id})">Layout & deck plan</a>n</li>
-                        <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts", new {id=item.Id})">Specification</a></li>
-                    </ul>
-                }
+                @*@foreach (var item in Model.SelectedYacht)
+                    {
+                        <ul>
+                            <li class="menu_y00">YACHTS</li>
+                            <li><a class="menu_yli01" href="#">Interior</a></li>
+                            <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts", new {id=item.Id})">Layout & deck plan</a>n</li>
+                            <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts", new {id=item.Id})">Specification</a></li>
+                        </ul>
+                    }*@
+                <ul>
+                    <li class="menu_y00">YACHTS</li>
+                    <li><a class="menu_yli01" href="#">Interior</a></li>
+                    <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts")">Layout & deck plan</a>n</li>
+                    <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts")">Specification</a></li>
+                </ul>
             </div>
             <!--次選單-->
 
             <div class="box1">
-                @foreach (var item in Model)
-                {
-                    @Html.DisplayFor(modelItem => item.Structual)
-                }
-
-               <br /><br />
+                @Html.DisplayFor(modelItem => Model.SelectedYacht.Structual)
+                <br /><br />
             </div>
 
             <div class="box3">
@@ -112,25 +123,21 @@
                                 @{
                                     int rowIndex = 0;
                                 }
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.SelectedYacht.Sizes)
                                 {
-                                    foreach (var size in item.Sizes)
-                                    {
-                                            var rowClass = (rowIndex % 2 == 1) ? "tr003" : "";
-                                            <tr class="@rowClass">
-                                                <th>@size.DimensionName</th>
-                                                <td>@size.DimensionValue</td>
-                                            </tr>
-                                        rowIndex++;
-                                    }
+
+                                    var rowClass = (rowIndex % 2 == 1) ? "tr003" : "";
+                                    <tr class="@rowClass">
+                                        <th>@item.DimensionName</th>
+                                        <td>@item.DimensionValue</td>
+                                    </tr>
+                                    rowIndex++;
                                 }
                             </table>
                         </td>
                         <td><img src="~/Images/ya01.jpg" alt="&quot;&quot;" width="278" height="345" /></td>
                     </tr>
                 </table>
-
-
             </div>
             <p class="topbuttom"><img src="~/Images/top.gif" alt="top" /></p>
 
