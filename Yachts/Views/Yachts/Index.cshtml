@@ -103,8 +103,8 @@
                 <ul>
                     <li class="menu_y00">YACHTS</li>
                     <li><a class="menu_yli01" href="#">Interior</a></li>
-                    <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts")">Layout & deck plan</a>n</li>
-                    <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts")">Specification</a></li>
+                    <li><a class="menu_yli02" href="@Url.Action("DeskPlan", "Yachts", new { id = @Model.SelectedYacht.Id })">Layout & deck plan</a>n</li>
+                    <li><a class="menu_yli03" href="@Url.Action("Specification", "Yachts", new { id = @Model.SelectedYacht.Id })">Specification</a></li>
                 </ul>
             </div>
             <!--次選單-->
