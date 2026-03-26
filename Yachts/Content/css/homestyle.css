@@ -163,7 +163,7 @@ body {
     right: 27px;
 }
 
-/*.bannermasks {
+.bannermasks {
     height: 371px;
     width: 967px;
     position: absolute;
@@ -171,9 +171,9 @@ body {
     top: 113px;
     z-index: 1;
     float: right;
-}*/
+}
 
-/*.bannerimg {
+.bannerimg {
     float: left;
     position: absolute;
     left: 43px;
@@ -182,7 +182,7 @@ body {
     width: 902px;
     height: 70px;
     overflow: hidden;
-}*/
+}
 
 .bannerimg li {
     float: right;
@@ -603,22 +603,22 @@ body {
 }
 
 .menu_yli01:hover {
-    background-image: url(Images/menu_y2_04.jpg);
+    background-image: url(/Images/menu_y2_04.jpg);
     width: 104px;
 }
 
 .menu_yli02 {
-    background-image: url(Images/menu_y1_05.jpg);
+    background-image: url(/Images/menu_y1_05.jpg);
     width: 160px;
 }
 
 .menu_yli02:hover {
-    background-image: url(Images/menu_y2_05.jpg);
+    background-image: url(/Images/menu_y2_05.jpg);
     width: 160px;
 }
 
 .menu_yli03 {
-    background-image: url(Images/menu_y1_06.jpg);
+    background-image: url(/Images/menu_y1_06.jpg);
     width: 123px;
 }
 

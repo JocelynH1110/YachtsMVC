@@ -39,13 +39,11 @@
             </ul>
         </div>
         <!--選單開始結束-->
-  
         <!--內容頁開始-->
         <article id="form1">
-           @RenderBody()
+            @RenderBody()
         </article>
         <!--內容頁結束-->
-
         <!--落款開始-->
         <div class="footer">
 
@@ -60,9 +58,11 @@
         </div>
         <!--落款結束-->
     </div>
-
-    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.cycle.all.2.74.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://malsup.github.io/jquery.cycle.all.js"></script>
+   
+    @*<script type="text/javascript" src="/Scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="/Scripts/jquery.cycle.all.2.74.js"></script>*@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.slideshow').cycle({
