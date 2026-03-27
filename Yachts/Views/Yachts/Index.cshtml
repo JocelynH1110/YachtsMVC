@@ -64,7 +64,7 @@
     <div class="left">
 
         <div class="left1">
-            <p><span>Yachts</span></p>
+            <p><span>YACHTS</span></p>
             <ul>
                 @*@foreach (var product in ViewBag.Products)
                     {
@@ -83,7 +83,7 @@
     </div>
     <!--左邊選單結束-->
     <!--右邊選單開始-->
-    <div id="crumb"><a href="#">Home</a> >> <a href="#">Yachts</a> >> <a href="/Yachts?product=@Model.SelectedYacht.Name"><span class="on1">@Model.SelectedYacht.Name</span></a></div>
+    <div id="crumb"><a href="@Url.Action("Index","Home")">Home</a> >> <a href="@Url.Action("Index", "Yachts")">Yachts</a> >> <a href="/Yachts?id=@Model.SelectedYacht.Id"><span class="on1">@Model.SelectedYacht.Name</span></a></div>
     <div class="right">
         <div class="right1">
             <div class="title"> <span>@Model.SelectedYacht.Name</span></div>
