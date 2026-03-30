@@ -33,12 +33,12 @@
         <dd>
             @if (Model.Sizes != null && Model.Sizes.Any())  // .Any() 檢查「集合裡是否有任何一筆資料」
             {
-                <table  style="border:1px solid gray !important;">
+                <table style="border:1px solid gray !important;">
                     @foreach (var item in Model.Sizes)
                     {
                         <tr>
-                            <th style="width: 130px; border: 1px solid gray !important"  >@item.DimensionName</th>
-                            <td style="width: 130px; border: 1px solid gray !important" >@item.DimensionValue</td>
+                            <th style="width: 130px; border: 1px solid gray !important">@item.DimensionName</th>
+                            <td style="width: 130px; border: 1px solid gray !important">@item.DimensionValue</td>
                         </tr>
                     }
                 </table>
@@ -47,6 +47,14 @@
             {
                 <p class="text-muted">無尺寸資料</p>
             }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
         </dd>
 
         <dt>

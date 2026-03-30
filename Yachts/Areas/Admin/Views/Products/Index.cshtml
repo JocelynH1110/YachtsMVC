@@ -28,9 +28,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Sizes)
-        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Structual)
         </th>
@@ -55,9 +55,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Sizes)
-            </td>*@
+            <td>
+                @(item.Description?.Truncate(30))
+            </td>
             <td>
                 @(item.Structual?.Truncate(30))
             </td>

@@ -74,7 +74,7 @@ namespace Yachts.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Sizes,Structual,Specification")] Product product, IEnumerable<HttpPostedFileBase> Files)
+        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Description,Sizes,Structual,Specification")] Product product, IEnumerable<HttpPostedFileBase> Files)
         {
             if (ModelState.IsValid)
             {
@@ -173,6 +173,7 @@ namespace Yachts.Areas.Admin.Controllers
                 // 更新產品資料
                 existing.Name = product.Name;
                 existing.IsLatest = product.IsLatest;
+                existing.Description = product.Description;
                 existing.Structual = product.Structual;
                 existing.Specification = product.Specification;
                 existing.UpdatedAt = DateTime.Now;
