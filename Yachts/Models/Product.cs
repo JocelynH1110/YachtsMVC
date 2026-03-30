@@ -22,6 +22,10 @@ namespace Yachts.Models
         [Display(Name = "遊艇尺寸")]   
         public virtual ICollection<ProductSize> Sizes { get; set; }
 
+        [Display(Name = "遊艇簡介")]
+        [StringLength(65535)]
+        public string Description { get; set; }
+
         [Display(Name = "結構圖")]
         [StringLength(65535)]
         public string Structual { get; set; }

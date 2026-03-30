@@ -373,6 +373,10 @@
     <Compile Include="Migrations\202603301729574_CreateProductImages.Designer.cs">
       <DependentUpon>202603301729574_CreateProductImages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603301759514_AddDescriptionToProduct.cs" />
+    <Compile Include="Migrations\202603301759514_AddDescriptionToProduct.Designer.cs">
+      <DependentUpon>202603301759514_AddDescriptionToProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\DBModelContext.cs" />
@@ -540,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603301729574_CreateProductImages.resx">
       <DependentUpon>202603301729574_CreateProductImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603301759514_AddDescriptionToProduct.resx">
+      <DependentUpon>202603301759514_AddDescriptionToProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
