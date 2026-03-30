@@ -37,5 +37,7 @@ namespace Yachts.Models
         [Display(Name = "更新時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        public ICollection<ProductImage> Images { get; set; }
     }
 }

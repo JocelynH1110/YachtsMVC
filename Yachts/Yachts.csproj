@@ -369,6 +369,10 @@
     <Compile Include="Migrations\202512020617436_ChangeDimensionNameToProductSize.Designer.cs">
       <DependentUpon>202512020617436_ChangeDimensionNameToProductSize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603301729574_CreateProductImages.cs" />
+    <Compile Include="Migrations\202603301729574_CreateProductImages.Designer.cs">
+      <DependentUpon>202603301729574_CreateProductImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\DBModelContext.cs" />
@@ -376,6 +380,7 @@
     <Compile Include="Models\NewsAttachment.cs" />
     <Compile Include="Models\NewsItem.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\ProductSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DealerRepository.cs" />
@@ -532,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512020617436_ChangeDimensionNameToProductSize.resx">
       <DependentUpon>202512020617436_ChangeDimensionNameToProductSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603301729574_CreateProductImages.resx">
+      <DependentUpon>202603301729574_CreateProductImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
