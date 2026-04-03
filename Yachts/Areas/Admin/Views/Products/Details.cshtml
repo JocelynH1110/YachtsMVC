@@ -19,6 +19,30 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Images)
+        </dt>
+
+        <dd>
+            @if (Model.Images != null && Model.Images.Any())
+            {
+               <div class="card" style="max-width:600px;">
+                   <ul class="list-group list-group-flush">
+                       @foreach (var img in Model.Images)
+                       {
+                           <li class="list-group-item">
+                               <img src="@Url.Content(img.ImageUrl)" width="150" />
+                           </li>
+                       }
+                   </ul>
+               </div>
+            }
+            else
+            {
+                <p class="text-muted">此遊艇沒有照片</p>
+            }
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 

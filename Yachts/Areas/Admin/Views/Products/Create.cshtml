@@ -25,6 +25,16 @@
     </div>
 
     <div class="form-group">
+        @Html.Label("上傳遊艇圖片", htmlAttributes: new { @class = "control-label col-md-2" })
+    
+        <div class="col-md-10">
+            <input type="file" id="fileInput" name="images" multiple class="form-control" />
+            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+            <div id="preview-container" style="margin-top:15px;"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelForRequired(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
@@ -96,22 +106,6 @@
 
     </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="新增" class="btn btn-default" />
@@ -162,8 +156,8 @@
             e.target.closest(".dimension-row").remove();
         }
     });
-</script>
-<!-- CKEditor -->
+
+/*<!-- CKEditor -->*/
 
 @*<script>
     CKEDITOR.replace('Specification', {
@@ -173,3 +167,43 @@
        filebrowserUploadMethod: 'xhr'
    });
 </script>*@
+
+
+    let selectedFiles = [];
+
+    $("#fileInput").on("change", function (e) {
+        const files = Array.from(e.target.files);
+
+        // 合併（避免覆蓋）
+        selectedFiles = selectedFiles.concat(files);
+
+        renderPreview();
+    });
+
+    function renderPreview() {
+        $("#preview-container").html("");
+
+        selectedFiles.forEach((file, index) => {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const html = `
+                    <div class="preview-item" data-index="${index}" style="display:inline-block;margin:10px;">
+                        <img src="${e.target.result}" width="120" style="display:block;border:1px solid #ccc;padding:5px;" />
+                        <div style="width:120px;word-break:break-all;">${file.name}</div>
+                        <button type="button" onclick="removeFile(${index})">移除</button>
+                    </div>
+                `;
+
+                $("#preview-container").append(html);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeFile(index) {
+        selectedFiles.splice(index, 1);
+        renderPreview();
+    }
+</script>

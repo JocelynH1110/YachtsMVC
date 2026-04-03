@@ -480,6 +480,8 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Uploads\Dealers\" />
     <Folder Include="Uploads\News\CoverPhotos\" />
+    <Folder Include="Uploads\Yachts\Images\" />
+    <Folder Include="Uploads\Yachts\Specifications\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

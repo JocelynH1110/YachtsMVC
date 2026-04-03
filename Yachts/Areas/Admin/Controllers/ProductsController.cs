@@ -54,7 +54,8 @@ namespace Yachts.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = db.Products.Include(p=>p.Images).FirstOrDefault(p=>p.Id==id);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -74,7 +75,7 @@ namespace Yachts.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Description,Sizes,Structual,Specification")] Product product, IEnumerable<HttpPostedFileBase> Files)
+        public ActionResult Create([Bind(Include = "Id,IsLatest,Name,Description,Sizes,Structual,Specification")] Product product,IEnumerable<HttpPostedFileBase> images)
         {
             if (ModelState.IsValid)
             {
@@ -87,38 +88,59 @@ namespace Yachts.Areas.Admin.Controllers
                 product.Specification = sanitizer.Sanitize(product.Specification);
 
                 db.Products.Add(product);
+                db.SaveChanges();   // 先取得 ProductId
+
+                int sortOrder = 0;
+
+                if (images != null)
+                {
+                    foreach (var image in images)
+                    {
+                        if (image != null && image.ContentLength > 0)
+                        {
+                            // 產生檔名
+                            var fileName = Guid.NewGuid()+Path.GetExtension(image.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Uploads/Yachts/Images/"),fileName);
+
+                            image.SaveAs(path);
+
+                            // 存進DB
+                            var productImage = new ProductImage
+                            {
+                                ProductId = product.Id,
+                                ImageUrl = "/Uploads/Yachts/Images/" + fileName,
+                                SortOrder = sortOrder,
+                                IsCover = sortOrder == 0,    // 第一張當封面
+                            };
+                            sortOrder++;
+                            db.ProductImages.Add(productImage);
+                        }
+                    }  
+                }
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
             return View(product);
         }
 
         // 圖片上傳 API
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase uplaod, string CKEditorFuncNum, string CKEditor, string langCode)
+        public ActionResult UploadImage(HttpPostedFileBase upload, string CKEditorFuncNum, string CKEditor, string langCode)
         {
-            if ((uplaod != null) && uplaod.ContentLength > 0)
+            if ((upload != null) && upload.ContentLength > 0)
             {
-                string fileName = Path.GetFileName(uplaod.FileName);
-                string path = Path.Combine(Server.MapPath("~/Uploads/Products/Specification/"), fileName);
-                uplaod.SaveAs(path);
+                string fileName =Guid.NewGuid()+Path.GetExtension(upload.FileName);
+                string path = Path.Combine(Server.MapPath("~/Uploads/Yachts/Specification/"), fileName);
 
-                var url = Url.Content(path);
-                var msg = "上傳成功";
+                upload.SaveAs(path);
 
-                return Content("<script>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", '" + url + "', '" + msg + "');</script>");
-                //// 回傳給 CKEditor 的格式固定如下：
-                //return Json(new
-                //{
-                //    uploaded = 1,
-                //    fileName = fileName,
-                //    url = Url.Content("~/Uploads/News/" + fileName)
-                //});
+                var url = Url.Content(path)+fileName;
+
+                return Json(new { uploaded=true,url=url });
             }
-            return HttpNotFound();
             // 上傳失敗時
-            //return Json(new { uploaded = 0, error = new { message = "上傳失敗" } });
+            return Json(new { uploaded = false, error = new { message = "上傳失敗" } });
         }
 
         // GET: Admin/Products/Edit/5
